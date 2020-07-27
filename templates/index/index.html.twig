@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bid{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <section class="top-header">
+            <img src="{{ asset('image/header.jpg') }}" alt="">
+        </section>
+
+        <section class="category my-3">
+            <div class="grid">
+                <div>
+                    <h5 class="text-center"> Voitures </h5>
+                    <div class="grid-image">
+                        <a href="">
+                            <img src="{{ asset('image/car.png') }}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="text-center"> Bijoux </h5>
+                    <div class="grid-image">
+                        <a href="">
+                            <img src="{{ asset('image/bijou.png') }}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="text-center"> Maison </h5>
+                    <div class="grid-image">
+                        <a href="">
+                            <img src="{{ asset('image/house.png') }}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="text-center"> Art </h5>
+                    <div class="grid-image">
+                        <a href="">
+                            <img src="{{ asset('image/art.png') }}" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="title-last-offer">
+                <h2 class=""> A ne pas manquer </h2>
+                <span class="h2-border"></span>
+            </div>
+            <div class="last-offer my-4">
+                <div>
+                    <div class="last-offer-title">
+                        Rolex
+                    </div>
+                    <img src="{{ asset('/image/offer/rolex.jpg') }}" alt="">
+                    <div class="last-offer-body">
+                        <p>Offre en cours: <strong>11.000€</strong> <br>
+                        <i style="color:red; font-weight: bold">Temps restant : 11h et 27min</i>
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="last-offer-title">
+                        Rolex
+                    </div>
+                    <img src="{{ asset('/image/offer/rolex.jpg') }}" alt="">
+                    <div class="last-offer-body">
+                        <p>Offre en cours: <strong>11.000€</strong> </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="last-offer-title">
+                        Rolex
+                    </div>
+                    <img src="{{ asset('/image/offer/rolex.jpg') }}" alt="">
+                    <div class="last-offer-body">
+                        <p>Offre en cours: <strong>11.000€</strong> </p>
+                    </div>
+                </div>
+                <div>
+                    <div class="last-offer-title">
+                        Rolex
+                    </div>
+                    <img src="{{ asset('/image/offer/rolex.jpg') }}" alt="">
+                    <div class="last-offer-body">
+                        <p>Offre en cours: <strong>11.000€</strong> </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="title-avis-client">
+            <h2 class="">Avis Client </h2>
+            <span class="h2-border"></span>
+        </section>
+        <section class="carousel-avis-client">
+            <section class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-12">
+                            <div class="mt-3">
+                                <!-- Bootstrap carousel-->
+                                <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
+                                    <!-- Bootstrap carousel indicators [nav] -->
+                                    <ol class="carousel-indicators mb-0">
+                                        <li class="" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
+                                    </ol>
+
+
+                                    <!-- Bootstrap inner [slides]-->
+                                    <div class="carousel-inner px-5 pb-4">
+                                        <!-- Carousel slide-->
+                                        <div class="carousel-item">
+                                            <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg" alt="" width="75">
+                                                <div class="media-body ml-3">
+                                                    <blockquote class="blockquote border-0 p-0">
+                                                        <p class="font-weight-light lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <footer class="blockquote-footer">
+                                                            Pascal, le 21 Mai 2020
+                                                        </footer>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Carousel slide-->
+                                        <div class="carousel-item active">
+                                            <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
+                                                <div class="media-body ml-3">
+                                                    <blockquote class="blockquote border-0 p-0">
+                                                        <p class="font-weight-light lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <footer class="blockquote-footer">
+                                                            Veronique, le 1 Mai 2020
+                                                        </footer>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Carousel slide-->
+                                        <div class="carousel-item">
+                                            <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
+                                                <div class="media-body ml-3">
+                                                    <blockquote class="blockquote border-0 p-0">
+                                                        <p class="font-weight-light lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <footer class="blockquote-footer">
+                                                            Jean-luc, le 01 Février 2020
+                                                        </footer>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Bootstrap controls [dots]-->
+                                    <a class="carousel-control-prev w-auto" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                        <i class="fa fa-angle-left text-dark text-lg"></i>
+                                        <span class="sr-only">Précedent</span>
+                                    </a>
+                                    <a class="carousel-control-next w-auto" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                        <i class="fa fa-angle-right text-dark text-lg"></i>
+                                        <span class="sr-only">Suivant</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+    </div>
+{% endblock %}

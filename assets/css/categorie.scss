@@ -1,0 +1,29 @@
+section.category{
+  margin-top: 2rem;
+}
+
+/**
+section.category div.grid{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-column-gap: 20px;
+}*/
+
+section.category div.grid{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 20px 10px;
+}
+section.category div.grid div.grid-image {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 128px;
+}
+
+@media only screen and (min-width: 760px) {
+  section.category div.grid{
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 20px 10px;
+  }
+}
