@@ -1,28 +1,9 @@
-
-section.top-header img{
-  width: 100%;
-  max-height:350px;
-  margin: 0 auto;
-  object-fit: fill;
-  border-radius: 0 0 8px 8px;
-}
-
-section.title-avis-client{
-  display: flex;
-  position: relative;
-}
-section.title-avis-client h2{
-  position: relative;
-  padding-right: 6px;
-}
-section.title-avis-client span.h2-border::after{
-  position: absolute;
-  content: '';
-  bottom: 1rem;
-  height: 2px;
-  width: calc(100% - 155.2px);
-  background-color: #222222;
-}
-section.title-avis-client div.carousel{
-  display: block !important;
+section.top-header{
+  img{
+    width: 100%;
+    max-height:350px;
+    margin: 0 auto;
+    object-fit: fill;
+    border-radius: 0 0 8px 8px;
+  }
 }
