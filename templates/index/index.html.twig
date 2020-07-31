@@ -10,38 +10,16 @@
 
         <section class="category my-3">
             <div class="grid">
+                {% for c in category %}
                 <div>
-                    <h5 class="text-center"> Voitures </h5>
+                    <h5 class="text-center"> {{ c.name | slice(0,8) }} </h5>
                     <div class="grid-image">
                         <a href="">
-                            <img src="{{ asset('image/car.png') }}" alt="">
+                            <img src="{{ c.image }}" alt="{{ c.name }}">
                         </a>
                     </div>
                 </div>
-                <div>
-                    <h5 class="text-center"> Bijoux </h5>
-                    <div class="grid-image">
-                        <a href="">
-                            <img src="{{ asset('image/bijou.png') }}" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <h5 class="text-center"> Maison </h5>
-                    <div class="grid-image">
-                        <a href="">
-                            <img src="{{ asset('image/house.png') }}" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <h5 class="text-center"> Art </h5>
-                    <div class="grid-image">
-                        <a href="">
-                            <img src="{{ asset('image/art.png') }}" alt="">
-                        </a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </section>
 
