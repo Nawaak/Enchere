@@ -1,38 +1,39 @@
 section.category{
-  div.grid{
+  .grid{
     h5{
       font-size: 16px;
+      text-transform: capitalize;
     }
     display: grid;
     grid-template-columns: repeat(4,75px);
     grid-gap: 20px 10px;
     justify-content: space-evenly;
   }
-  div.grid-image {
+  .grid-image {
     display: flex;
     justify-content: center;
     max-width: 100%;
     min-height: auto;
-    a > img {
-      width: 75px;
-      height: 75px;
+
+    img{
       border-radius: 75px;
-      object-fit: cover;
+      box-shadow: aqua;
     }
+
   }
 }
 
 @media only screen and (min-width: 768px) {
   section.category {
-    div.grid{
+    .grid{
       h5{
         font-size: 1.25rem !important;
       }
       grid-template-columns: repeat(4,1fr);
       grid-gap: 20px 10px;
     }
-    div.grid-image {
-      a > img {
+    .grid-image {
+      img {
         width: 128px;
         height: 128px;
       }
