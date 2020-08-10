@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Offre {{ bidding.name | capitalize }}{% endblock %}
+
+{% block body %}
+<div class="container my-3">
+    <div class="card">
+        <div class="card-image">
+            <img src="{{ bidding.image }}" alt="img" class="w-100 rounded-top">
+        </div>
+        <div class="bg-white py-2 text-center">
+            Offre en cours: <span class="text-danger">119€</span>
+        </div>
+        <div class="card-body rounded-bottom">
+            <h5>{{ bidding.name | capitalize }}</h5>
+            <p>{{ bidding.content }}</p>
+            <div class="d-flex justify-content-end align-items-center card-body-action">
+                <a class="btn btn-sm btn-info text-white">Enchérir</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

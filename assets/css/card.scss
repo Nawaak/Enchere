@@ -1,0 +1,38 @@
+ .card-image {
+   position: relative;
+
+   &::before{
+     content: "";
+     position: absolute;
+     left:0;
+     top: 0;
+     bottom: 0;
+     right: 0;
+     background-color: rgba(0,0,0,.09);
+     z-index: 1500;
+   }
+  }
+  .card{
+    background-color: var(--light);
+    font-size: 13px;
+  }
+  .card-body-action{
+    :last-child{
+      margin-left: 0.5rem;
+    }
+    a{
+      font-size: 12px;
+    }
+  }
+
+@include media-breakpoint-up(md){
+  .card-item{
+    /*.col-lg-3:nth-child(4n+5-1){
+      flex: 0 0 auto;
+      max-width: 100% !important;
+    }*/
+  }
+  .card-image img{
+    max-height: 168px !important;
+  }
+  }

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,6 +35,16 @@ class Category
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bidding::class, mappedBy="category", orphanRemoval=true)
+     */
+    private $biddings;
+
+    public function __construct()
+    {
+        $this->biddings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -84,6 +96,37 @@ class Category
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bidding[]
+     */
+    public function getBiddings(): Collection
+    {
+        return $this->biddings;
+    }
+
+    public function addBidding(Bidding $bidding): self
+    {
+        if (!$this->biddings->contains($bidding)) {
+            $this->biddings[] = $bidding;
+            $bidding->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBidding(Bidding $bidding): self
+    {
+        if ($this->biddings->contains($bidding)) {
+            $this->biddings->removeElement($bidding);
+            // set the owning side to null (unless already changed)
+            if ($bidding->getCategory() === $this) {
+                $bidding->setCategory(null);
+            }
+        }
 
         return $this;
     }

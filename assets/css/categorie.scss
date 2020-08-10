@@ -16,8 +16,9 @@ section.category{
     min-height: auto;
 
     img{
+      width: 75px;
+      height: 75px;
       border-radius: 75px;
-      box-shadow: aqua;
     }
 
   }
@@ -36,6 +37,7 @@ section.category{
       img {
         width: 128px;
         height: 128px;
+        border-radius: 128px;
       }
     }
   }

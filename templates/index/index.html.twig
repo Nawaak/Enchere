@@ -14,7 +14,7 @@
                 <div>
                     <h5 class="text-center"> {{ c.name }} </h5>
                     <div class="grid-image">
-                        <a href="">
+                        <a href="{{ path('category.show', {slug: c.slug}) }}">
                             <img src="{{ c.image }}" alt="{{ c.name }}">
                         </a>
                     </div>
