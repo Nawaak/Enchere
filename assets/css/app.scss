@@ -7,6 +7,10 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+.popover{
+    max-width: 100%;
+}
+
 @import "top-header";
 @import "categorie";
 @import "rating";

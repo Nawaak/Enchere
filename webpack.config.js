@@ -1,5 +1,6 @@
-var Encore = require('@symfony/webpack-encore');
-
+let Encore = require('@symfony/webpack-encore');
+let path = require('path');
+let twigLoader = require('twig-loader')
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -34,6 +35,13 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
+    .addLoader({
+        test: /\.twig$/,
+        loader: 'twigLoader',
+        include: [
+            path.join(__dirname, 'templates')
+        ]
+    })
     /*
      * FEATURE CONFIG
      *
@@ -70,5 +78,25 @@ Encore
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
 ;
+module.exports = {
+    //...
 
+    module: {
+        rules: [
+            {
+                test: /\.twig$/,
+                use: {
+                    loader: 'twigLoader',
+                    options: {
+                        // See options section below
+                    },
+                }
+            }
+        ]
+    },
+
+    node: {
+        fs: "empty" // avoids error messages
+    }
+};
 module.exports = Encore.getWebpackConfig();

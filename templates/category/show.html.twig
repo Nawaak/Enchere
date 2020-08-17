@@ -30,6 +30,7 @@
                     <div class="col-6 col-md-4 col-lg-3 mb-4">
                         <div class="card">
                             <div class="card-image">
+                                <span id="expireAt" data-expire="{{ b.expireAt | date }}"></span>
                                 <img src="{{ b.image }}" alt="img" class="w-100 rounded-top">
                             </div>
                             <div class="bg-white py-2 text-center">
@@ -38,9 +39,9 @@
                             <div class="card-body rounded-bottom">
                                 <h5>{{ b.name | capitalize }}</h5>
                                 <p>{{ b.content | slice(0,86) }}..</p>
+                                <p>Prix de départ: <span class="text-danger">59€</span></p>
                                 <div class="d-flex justify-content-end align-items-center card-body-action">
-                                    <a href="{{ path('bidding_show', {bidding: b.id}) }}" class="btn btn-sm btn-outline-info text-dark">En savoir +</a>
-                                    <a class="btn btn-sm btn-info text-white">Enchérir</a>
+                                    <a href="{{ path('bidding_show', {bidding: b.id}) }}" class="btn btn-sm btn-info">En savoir +</a>
                                 </div>
                             </div>
                         </div>

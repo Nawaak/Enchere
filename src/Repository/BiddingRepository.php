@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Bidding;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Array_;
 
 /**
  * @method Bidding|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,7 +48,12 @@ class BiddingRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findBiddingsWithCategory(?int $id)
+
+    /**
+     * @param int|null $id
+     * @return array|null
+     */
+    public function findBiddingsWithCategory(?int $id): ?array
     {
         return $this->createQueryBuilder('t')
             ->where('t.category = :id')

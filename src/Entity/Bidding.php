@@ -38,6 +38,11 @@ class Bidding
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="datetime",nullable=false)
+     */
+    private $expireAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Bidding
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getExpireAt(): ?\DateTimeInterface
+    {
+        return $this->expireAt;
+    }
+
+    public function setExpireAt(\DateTimeInterface $expireAt): self
+    {
+        $this->expireAt = $expireAt;
 
         return $this;
     }
