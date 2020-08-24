@@ -9,14 +9,9 @@
 import '../css/app.scss';
 import './count-time'
 
-const $ = require('jquery');
-// this "modifies" the jquery module: adding behavior to it
-// the bootstrap module doesn't export/return anything
-require('bootstrap');
+const $ = import('jquery');
 
-// or you can include specific pieces
-// require('bootstrap/js/dist/tooltip');
-// require('bootstrap/js/dist/popover');
+import('bootstrap');
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover({
@@ -35,8 +30,4 @@ $(document).ready(function() {
     });
 
 });
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 

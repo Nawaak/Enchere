@@ -1,25 +1,27 @@
 {
+    "name": "Enchere.fr",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.30.0",
-        "core-js": "^3.0.0",
-        "node-sass": "^4.14.1",
-        "regenerator-runtime": "^0.13.2",
-        "sass-loader": "^8.0.0",
-        "webpack-notifier": "^1.6.0"
+        "@babel/core": "^7.10.4",
+        "@koa/cors": "^3.1.0",
+        "@rollup/plugin-babel": "^5.0.4",
+        "@rollup/plugin-commonjs": "^13.0.0",
+        "@rollup/plugin-node-resolve": "^8.1.0",
+        "rollup": "^2.21.0",
+        "rollup-plugin-postcss": "^3.1.2",
+        "rollup-plugin-root-import": "^1.0.0",
+        "sass": "^1.26.5",
+        "vite": "^1.0.0-rc.4"
     },
-    "license": "UNLICENSED",
-    "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "dev": "rm -rf public/assets/time && npx vite",
+        "build": "rm -rf public/assets && npx rollup -c rollup.config.js && touch public/assets/time"
     },
     "dependencies": {
         "bootstrap": "^4.5.0",
         "jquery": "^3.5.1",
-        "popper.js": "^1.16.1",
-        "twig-loader": "^0.5.4",
-        "vite": "^1.0.0-rc.4"
+        "popper.js": "^1.16.1"
     }
 }

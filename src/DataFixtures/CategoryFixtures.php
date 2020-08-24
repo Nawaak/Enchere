@@ -26,7 +26,7 @@ class CategoryFixtures extends Fixture
                     ->setImage('https://mdbootstrap.com/img/Photos/Others/photo'.mt_rand(1,9).'.jpg')
                     ->setContent($faker->text(400))
                     ->setCategory($category)
-                    ->setExpireAt($faker->dateTimeBetween('now', '+7 days   ', 'Europe/Paris'));
+                    ->setExpireAt($faker->dateTimeBetween('now', '+1 hours   ', 'Europe/Paris'));
             $manager->persist($bidding);
             }
         }
