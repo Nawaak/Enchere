@@ -17,7 +17,6 @@ const config = {
                 })
             }
         })
-        console.log(app)
         app.use(cors({ origin: '*' }))
     }
 }

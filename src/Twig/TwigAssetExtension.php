@@ -65,7 +65,7 @@ class TwigAssetExtension extends AbstractExtension
         if (0 === $time && $request) {
             $host = $request->getHost();
 
-            return "http://{$host}:8000/assets/{$name}";
+            return "http://{$host}:3000/{$name}";
         }
 
         return "/assets/$name?$time";
@@ -78,7 +78,7 @@ class TwigAssetExtension extends AbstractExtension
             return ''; // Le CSS est chargé depuis le JS dans l'environnement de dev
         }
 
-        return '<link rel="stylesheet" media="screen" href="'.$this->uri($name.'.css').'"/>';
+        return '<link rel="stylesheet" media="screen" href="'.$this->uri($name.'.scss').'"/>';
     }
 
     public function script(string $name): string

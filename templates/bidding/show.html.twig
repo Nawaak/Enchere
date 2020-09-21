@@ -16,7 +16,7 @@
             <h5>{{ bidding.name | capitalize }}</h5>
             <p>{{ bidding.content }}</p>
             <div class="d-flex justify-content-end align-items-center card-body-action">
-                <button class="btn btn-sm btn-info text-white" id="js-show" data-toggle="popover" title="Faire une offre" data-placement="right">Enchérir</button>
+                <button class="btn btn-sm btn-info text-white" id="js-show" data-toggle="popover" title="Faire une offre" data-placement="right" {% if bidding.expireAt | date < 'now'|date %} disabled > Expirer </button> {% else %} >Enchérir</button> {% endif %}
             </div>
         </div>
     </div>
@@ -42,21 +42,25 @@
                     <li class="list-group-item">Je****a, a fait une offre de 75€</li>
                 </ul>
             </div>
-            <div class="col-12 col-lg-8 my-sm-3 my-lg-0">
-                <h3>Contacter le vendeur</h3>
-                <hr>
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Adresse mail</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="email">
-                        <small id="emailHelp" class="form-text text-muted">Cette adresse mail servira au vendeur afin de vous répondre. </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Message</label>
-                        <textarea type="text" class="form-control" id="exampleInputPassword1"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-                </form>
+            <div class="col-12 col-lg-8 my-3 my-lg-0">
+            <h3>Contacter le vendeur</h3>
+            <hr>
+            {% if bidding.expireAt | date <= 'now'|date %}
+            <p>Vous ne pouvez plus contacter le vendeur, l'offre a expiré.</p>
+            {% else %}
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Adresse mail</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="email">
+                    <small id="emailHelp" class="form-text text-muted">Cette adresse mail servira au vendeur afin de vous répondre. </small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Message</label>
+                    <textarea type="text" class="form-control" id="exampleInputPassword1"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+            {% endif %}
             </div>
         </div>
     </section>

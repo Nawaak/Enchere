@@ -7,7 +7,7 @@ import commonjs from '@rollup/plugin-commonjs'
 const sources = ['app']
 
 export default sources.map(source => ({
-    input: `assets/js/${source}.js`,
+    input: `assets/${source}.js`,
     output: {
         dir: 'public/assets',
         format: 'es'
