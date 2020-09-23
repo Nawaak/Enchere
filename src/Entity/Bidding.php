@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BiddingRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,26 @@ class Bidding
      * @ORM\Column(type="datetime",nullable=false)
      */
     private $expireAt;
+
+    /**
+     * @ORM\Column(type="float",nullable=true)
+     */
+    private $startPrice = 5.99;
+
+    /**
+     * @ORM\Column(type="boolean",nullable=true)
+     */
+    private $expire = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OfferBidding::class, mappedBy="bidding")
+     */
+    private $offerBiddings;
+
+    public function __construct()
+    {
+        $this->offerBiddings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +126,61 @@ class Bidding
     public function setExpireAt(\DateTimeInterface $expireAt): self
     {
         $this->expireAt = $expireAt;
+
+        return $this;
+    }
+
+    public function getStartPrice(): ?float
+    {
+        return $this->startPrice;
+    }
+
+    public function setStartPrice(float $startPrice): self
+    {
+        $this->startPrice = $startPrice;
+
+        return $this;
+    }
+
+    public function getExpire(): ?bool
+    {
+        return $this->expire;
+    }
+
+    public function setExpire(bool $expire): self
+    {
+        $this->expire = $expire;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OfferBidding[]
+     */
+    public function getOfferBiddings(): Collection
+    {
+        return $this->offerBiddings;
+    }
+
+    public function addOfferBidding(OfferBidding $offerBidding): self
+    {
+        if (!$this->offerBiddings->contains($offerBidding)) {
+            $this->offerBiddings[] = $offerBidding;
+            $offerBidding->setBidding($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOfferBidding(OfferBidding $offerBidding): self
+    {
+        if ($this->offerBiddings->contains($offerBidding)) {
+            $this->offerBiddings->removeElement($offerBidding);
+            // set the owning side to null (unless already changed)
+            if ($offerBidding->getBidding() === $this) {
+                $offerBidding->setBidding(null);
+            }
+        }
 
         return $this;
     }

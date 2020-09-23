@@ -15,6 +15,7 @@
         <div class="card-body rounded-bottom">
             <h5>{{ bidding.name | capitalize }}</h5>
             <p>{{ bidding.content }}</p>
+            <p>Prix de départ: <span class="text-danger">{{ bidding.startPrice }} €</span></p>
             <div class="d-flex justify-content-end align-items-center card-body-action">
                 <button class="btn btn-sm btn-info text-white" id="js-show" data-toggle="popover" title="Faire une offre" data-placement="right" {% if bidding.expireAt | date < 'now'|date %} disabled > Expirer </button> {% else %} >Enchérir</button> {% endif %}
             </div>
@@ -35,11 +36,9 @@
                 <h3>Les offres</h3>
                 <hr>
                 <ul class="list-group">
-                    <li class="list-group-item text-success">Je****a, l'emporte au prix de 119€</li>
-                    <li class="list-group-item">Je****a, a fait une offre de 119€</li>
-                    <li class="list-group-item">Je****a, a fait une offre de 100€</li>
-                    <li class="list-group-item">Je****a, a fait une offre de 80€</li>
-                    <li class="list-group-item">Je****a, a fait une offre de 75€</li>
+                    {% for offer in bidding.OfferBiddings %}
+                    <li class="list-group-item">Je****a, a fait une offre de <b>{{ offer.price }}€</b></li>  
+                    {% endfor %}
                 </ul>
             </div>
             <div class="col-12 col-lg-8 my-3 my-lg-0">

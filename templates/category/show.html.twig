@@ -39,7 +39,7 @@
                             <div class="card-body rounded-bottom">
                                 <h5>{{ b.name | capitalize }}</h5>
                                 <p>{{ b.content | slice(0,86) }}..</p>
-                                <p>Prix de départ: <span class="text-danger">59€</span></p>
+                                <p>Prix de départ: <span class="text-danger">{{ b.startPrice }} €</span></p>
                                 <div class="d-flex justify-content-end align-items-center card-body-action">
                                     <a href="{{ path('bidding_show', {bidding: b.id}) }}" class="btn btn-sm btn-info">En savoir +</a>
                                 </div>
