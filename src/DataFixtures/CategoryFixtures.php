@@ -30,13 +30,13 @@ class CategoryFixtures extends Fixture
                     ->setExpireAt($faker->dateTimeBetween('now', '+1 hours   ', 'Europe/Paris'))
                     ->setExpire(mt_rand(0,1))
                     ->setStartPrice(mt_rand(29,3900));
-            for ($o = 0; $o <= mt_rand(2,6); $o++){
-                $Offer = new OfferBidding;
-                $Offer->setPrice(mt_rand($bidding->getStartPrice(),$bidding->getStartPrice() + mt_rand(9,35)))
-                    ->setBidding($bidding);
-                    $manager->persist($Offer);
-            }
-            $manager->persist($bidding);
+                for ($o = 0; $o <= mt_rand(2,6); $o++){
+                    $Offer = new OfferBidding;
+                    $Offer->setPrice(mt_rand($bidding->getStartPrice(),$bidding->getStartPrice() + mt_rand(0,35)))
+                        ->setBidding($bidding);
+                        $manager->persist($Offer);
+                }
+                $manager->persist($bidding);
             }
         }
 

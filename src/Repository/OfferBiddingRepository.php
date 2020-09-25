@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Bidding;
 use App\Entity\OfferBidding;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,6 +20,17 @@ class OfferBiddingRepository extends ServiceEntityRepository
         parent::__construct($registry, OfferBidding::class);
     }
 
+    public function findOfferByBidding($bidding)
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.bidding = :bidding')
+            ->setParameter('bidding', $bidding)
+            ->orderBy('u.price', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return OfferBidding[] Returns an array of OfferBidding objects
     //  */

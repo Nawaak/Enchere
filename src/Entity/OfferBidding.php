@@ -24,7 +24,7 @@ class OfferBidding
 
     /**
      * @ORM\ManyToOne(targetEntity=Bidding::class, inversedBy="offerBiddings")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $bidding;
 

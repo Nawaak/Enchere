@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Bidding;
+use App\Entity\OfferBidding;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Types\Array_;
@@ -19,7 +20,17 @@ class BiddingRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Bidding::class);
     }
+    
 
+    public function findOfferByBidding($bidding)
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin(OfferBidding::class,'o')
+            ->where('o.bidding = :bidding')
+            ->setParameter('bidding', $bidding)
+            ->getQuery()
+        ;
+    }
     // /**
     //  * @return Bidding[] Returns an array of Bidding objects
     //  */

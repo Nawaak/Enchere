@@ -36,8 +36,8 @@
                 <h3>Les offres</h3>
                 <hr>
                 <ul class="list-group">
-                    {% for offer in bidding.OfferBiddings %}
-                    <li class="list-group-item">Je****a, a fait une offre de <b>{{ offer.price }}€</b></li>  
+                    {% for o in offer %}
+                        <li class="list-group-item">{{ bidding.name | hide_name}}, a fait une offre de <b>{{ o.price }}€</b></li>  
                     {% endfor %}
                 </ul>
             </div>
