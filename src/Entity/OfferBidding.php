@@ -28,6 +28,12 @@ class OfferBidding
      */
     private $bidding;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="offerBiddings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +59,18 @@ class OfferBidding
     public function setBidding(?Bidding $bidding): self
     {
         $this->bidding = $bidding;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

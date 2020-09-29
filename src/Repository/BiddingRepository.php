@@ -25,7 +25,7 @@ class BiddingRepository extends ServiceEntityRepository
     public function findOfferByBidding($bidding)
     {
         return $this->createQueryBuilder('u')
-            ->leftJoin(OfferBidding::class,'o')
+            ->innerJoin(OfferBidding::class,'o')
             ->where('o.bidding = :bidding')
             ->setParameter('bidding', $bidding)
             ->getQuery()
