@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Bidding;
-use App\Entity\OfferBidding;
 use App\Repository\BiddingRepository;
 use App\Repository\OfferBiddingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +15,7 @@ class BiddingController extends AbstractController
      * @Route("/offre/{bidding}", name="bidding_show")
      * @param Bidding $bidding
      * @param BiddingRepository $repo
+     * @param OfferBiddingRepository $offerBiddingRepo
      * @return Response
      */
     public function show(Bidding $bidding, BiddingRepository $repo, OfferBiddingRepository $offerBiddingRepo): Response
@@ -23,7 +23,7 @@ class BiddingController extends AbstractController
         $bidding = $repo->findOneBy([
             'id' => $bidding->getId()
         ]);
-        //$offer = $repo->findOfferByBidding($bidding->getId());
+
         $offer = $offerBiddingRepo->findOfferByBidding($bidding->getId());
 
         return $this->render('bidding/show.html.twig',compact('bidding','offer'));

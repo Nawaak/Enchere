@@ -10,7 +10,7 @@
             <img src="{{ bidding.image }}" alt="img" class="w-100 rounded-top">
         </div>
         <div class="bg-white py-2 text-center">
-            Offre en cours: <span class="text-danger">119€</span>
+            Offre en cours: <span class="text-danger">{{ findLastPrice(bidding)[0].price }} €</span>
         </div>
         <div class="card-body rounded-bottom">
             <h5>{{ bidding.name | capitalize }}</h5>

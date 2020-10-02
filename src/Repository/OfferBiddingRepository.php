@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Bidding;
 use App\Entity\OfferBidding;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -13,6 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method OfferBidding[]    findAll()
  * @method OfferBidding[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class OfferBiddingRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -20,10 +20,14 @@ class OfferBiddingRepository extends ServiceEntityRepository
         parent::__construct($registry, OfferBidding::class);
     }
 
+    /**
+     * @param $bidding
+     * @return int|mixed|string
+     */
     public function findOfferByBidding($bidding)
     {
         return $this->createQueryBuilder('u')
-            ->select('u')
+            ->join(OfferBidding::class,'o')
             ->where('u.bidding = :bidding')
             ->setParameter('bidding', $bidding)
             ->orderBy('u.price', 'DESC')
@@ -31,32 +35,19 @@ class OfferBiddingRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    // /**
-    //  * @return OfferBidding[] Returns an array of OfferBidding objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?OfferBidding
+    /**
+     * @param $bidding
+     * @return int|mixed|string
+     */
+    public function findLastOffer($bidding)
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('u')
+            ->where('u.bidding = :bidding')
+            ->setParameter('bidding', $bidding)
+            ->orderBy('u.price','DESC')
+            ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }
