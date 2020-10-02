@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{slug}", name="category.show")
+     * @Route("/categorie/{slug}", name="category.show")
      * @param Category $category
      * @param BiddingRepository $repo
      * @return Response
