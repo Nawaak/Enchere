@@ -8,9 +8,9 @@
      background: rgba(23,162,184, 0.7);
      color: var(--white);
      padding: 0 0.5rem;
-     border-radius: 3px 0 5px 0;
-     z-index: 1500;
+     border-radius: 0.25rem 0 5px 0;
    }
+
    b{
      font-weight: 200;
    }
@@ -19,24 +19,10 @@
     background-color: var(--light);
     font-size: 13px;
   }
-  .card-body-action{
-    :last-child{
-      margin-left: 0.5rem;
-    }
-    a{
-      font-size: 12px;
-    }
-  }
 
 @include media-breakpoint-up(md){
-  .card-item{
-    /*.col-lg-3:nth-child(4n+5-1){
-      flex: 0 0 auto;
-      max-width: 100% !important;
-    }*/
-  }
   .card-image img{
     max-height: 168px !important;
     object-fit: cover;
   }
-  }
+}

@@ -10,7 +10,7 @@
             <img src="{{ bidding.image }}" alt="img" class="w-100 rounded-top">
         </div>
         <div class="bg-white py-2 text-center">
-            Offre en cours: <span class="text-danger">{{ findLastPrice(bidding)[0].price }} €</span>
+            Offre en cours: <span class="text-danger"><ins>{{ findLastPrice(bidding)[0].price }}€</ins></span>
         </div>
         <div class="card-body rounded-bottom">
             <h5>{{ bidding.name | capitalize }}</h5>
@@ -45,7 +45,7 @@
             <h3>Contacter le vendeur</h3>
             <hr>
             {% if bidding.expireAt | date <= 'now'|date %}
-            <p>Vous ne pouvez plus contacter le vendeur, l'offre a expiré.</p>
+            <p>Vous ne pouvez plus contacter le vendeur, l'offre a expirée.</p>
             {% else %}
             <form>
                 <div class="form-group">
