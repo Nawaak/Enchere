@@ -19,25 +19,26 @@ class Category
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id ;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private ?string $image;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $slug;
+    private ?string $slug;
 
     /**
      * @ORM\OneToMany(targetEntity=Bidding::class, mappedBy="category", orphanRemoval=true)
+     * @var Collection<int, Bidding>
      */
     private $biddings;
 

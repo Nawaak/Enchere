@@ -17,46 +17,47 @@ class Bidding
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $content;
+    private string $content;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private string $image;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="biddings")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $category;
+    private ?Category $category;
 
     /**
      * @ORM\Column(type="datetime",nullable=false)
      */
-    private $expireAt;
+    private \DateTimeInterface $expireAt;
 
     /**
      * @ORM\Column(type="float",nullable=true)
      */
-    private $startPrice = 5.99;
+    private float $startPrice = 5.99;
 
     /**
      * @ORM\Column(type="boolean",nullable=true)
      */
-    private $expire = 0;
+    private bool $expire = false;
 
     /**
      * @ORM\OneToMany(targetEntity=OfferBidding::class, mappedBy="bidding")
+     * @var Collection<int, OfferBidding>
      */
     private $offerBiddings;
 
@@ -113,6 +114,7 @@ class Bidding
 
     public function setCategory(?Category $category): self
     {
+        /** @var Category $category */
         $this->category = $category;
 
         return $this;

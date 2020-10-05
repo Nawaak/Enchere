@@ -7,8 +7,6 @@ parameters:
   level: 8
   paths:
     - src
-  ignoreErrors:
-    - '#Property [a-zA-Z0-9\\_]+::\$[a-zA-Z0-9]* has no typehint specified.#'
   checkMissingIterableValueType: false
   checkGenericClassInNonGenericObjectType: false
   symfony:

@@ -12,12 +12,12 @@ use Twig\TwigFunction;
  */
 class TwigAssetExtension extends AbstractExtension
 {
-    private $assetPath;
-    private $cache;
+    private string $assetPath;
+    private CacheItemPoolInterface $cache;
     const CACHE_KEY = 'asset_time';
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    public function __construct($assetPath, CacheItemPoolInterface $cache, RequestStack $requestStack)
+    public function __construct(string $assetPath, CacheItemPoolInterface $cache, RequestStack $requestStack)
     {
         $this->assetPath = $assetPath;
         $this->cache = $cache;

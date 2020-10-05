@@ -24,7 +24,7 @@ class BiddingController extends AbstractController
             'id' => $bidding->getId()
         ]);
 
-        $offer = $offerBiddingRepo->findOfferByBidding($bidding->getId());
+        $offer = $offerBiddingRepo->findOfferByBidding($bidding);
 
         return $this->render('bidding/show.html.twig',compact('bidding','offer'));
     }

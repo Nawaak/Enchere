@@ -3,17 +3,16 @@
 namespace App\Twig;
 
 use App\Entity\Bidding;
-use App\Entity\OfferBidding;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\OfferBiddingRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class TwigQueryExtension extends AbstractExtension
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
+
+
+    /** @var OfferBiddingRepository */
+    private OfferBiddingRepository $repository;
 
     public function getFunctions()
     {
@@ -22,18 +21,17 @@ class TwigQueryExtension extends AbstractExtension
         ];
     }
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(OfferBiddingRepository $repository)
     {
-        $this->em = $em;
+        $this->repository = $repository;
     }
 
     /**
      * @param Bidding $bidding
      * @return Bidding[]
      */
-    public function find(Bidding $bidding){
-        $em = $this->em->getRepository(OfferBidding::class);
-        return $em->findLastOffer($bidding);
+    public function find(Bidding $bidding): ?array{
+        return $this->repository->findLastOffer($bidding);
     }
 
 }

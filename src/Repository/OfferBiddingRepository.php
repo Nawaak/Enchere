@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Bidding;
 use App\Entity\OfferBidding;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,10 +22,10 @@ class OfferBiddingRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $bidding
+     * @param Bidding|null $bidding
      * @return int|mixed|string
      */
-    public function findOfferByBidding($bidding)
+    public function findOfferByBidding(?Bidding $bidding)
     {
         return $this->createQueryBuilder('u')
             ->join(OfferBidding::class,'o')
@@ -37,10 +38,10 @@ class OfferBiddingRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $bidding
+     * @param Bidding|null $bidding
      * @return int|mixed|string
      */
-    public function findLastOffer($bidding)
+    public function findLastOffer(?Bidding $bidding)
     {
         return $this->createQueryBuilder('u')
             ->where('u.bidding = :bidding')

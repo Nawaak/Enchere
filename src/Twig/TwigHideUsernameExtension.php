@@ -2,11 +2,8 @@
 
 namespace App\Twig;
 
-use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig\TwigFunction;
 
 /**
  * Permet de masquer le pseudo de l'encherisseur (ex: Br***on => Brandon)
@@ -21,7 +18,11 @@ class TwigHideUsernameExtension extends AbstractExtension
         ];    
     }
 
-    public function hideName ($name)
+    /**
+     * @param string $name
+     * @return string|null
+     */
+    public function hideName (string $name): ?string
     {
         if(strlen($name) <= 5)
         {

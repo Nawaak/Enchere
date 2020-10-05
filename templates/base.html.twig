@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{% block title %}Bid -{% endblock %}</title>
+        <title>{% block title %}Bid - {% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,100&display=swap" rel="stylesheet">
         {% block stylesheets %}
@@ -39,10 +39,10 @@
                             <a class="btn btn-warning btn-sm w-100">Rechercher</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-info btn-sm w-100" href="#">Connexion</a>
+                            <a class="btn btn-outline-info btn-sm w-100" href="{{ path('login') }}">Connexion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-info btn-sm w-100 offset-sm-0" href="#">Inscription</a>
+                            <a class="btn btn-info btn-sm w-100 offset-sm-0" href="{{ path('register') }}">Inscription</a>
                         </li>
                     </ul>
                 </div>

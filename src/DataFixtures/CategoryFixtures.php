@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CategoryFixtures extends Fixture
 {
-    private $encoder;
+    private UserPasswordEncoderInterface $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
@@ -54,13 +54,13 @@ class CategoryFixtures extends Fixture
                     ->setContent($faker->text(400))
                     ->setCategory($category)
                     ->setExpireAt($faker->dateTimeBetween('now', '+1 hours   ', 'Europe/Paris'))
-                    ->setExpire(mt_rand(0, 1))
-                    ->setStartPrice(mt_rand(29, 3900));
+                    ->setExpire((bool)mt_rand(0,1))
+                    ->setStartPrice($faker->randomFloat(2,100,1000));
                 $manager->persist($bidding);
 
                 for ($o = 0; $o <= mt_rand(2, 6); $o++) {
                     $Offer = new OfferBidding;
-                    $Offer->setPrice(mt_rand($bidding->getStartPrice(), $bidding->getStartPrice() + mt_rand(0, 35)))
+                    $Offer->setPrice($faker->randomFloat(2,$bidding->getStartPrice(), $bidding->getStartPrice() + mt_rand(0, 35)))
                         ->setBidding($bidding)
                         ->setUser($faker->randomElement($users));
                     $manager->persist($Offer);

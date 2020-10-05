@@ -15,24 +15,24 @@ class OfferBidding
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float", nullable=false)
      */
-    private $price;
+    private float $price;
 
     /**
      * @ORM\ManyToOne(targetEntity=Bidding::class, inversedBy="offerBiddings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $bidding;
+    private ?Bidding $bidding;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="offerBiddings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private ?User $user;
 
     public function getId(): ?int
     {
@@ -44,7 +44,7 @@ class OfferBidding
         return $this->price;
     }
 
-    public function setPrice(?float $price): self
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
