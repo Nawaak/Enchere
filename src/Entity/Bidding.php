@@ -46,14 +46,14 @@ class Bidding
     private \DateTimeInterface $expireAt;
 
     /**
-     * @ORM\Column(type="float",nullable=true)
+     * @ORM\Column(type="float")
      */
-    private float $startPrice = 5.99;
+    private float $startPrice;
 
     /**
-     * @ORM\Column(type="boolean",nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private bool $expire = false;
+    private bool $expire;
 
     /**
      * @ORM\OneToMany(targetEntity=OfferBidding::class, mappedBy="bidding")
