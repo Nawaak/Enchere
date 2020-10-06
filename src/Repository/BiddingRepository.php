@@ -20,17 +20,6 @@ class BiddingRepository extends ServiceEntityRepository
         parent::__construct($registry, Bidding::class);
     }
 
-    public function findOfferByBidding(?Bidding $bidding): ?array
-    {
-        return $this->createQueryBuilder('u')
-            ->innerJoin(OfferBidding::class, 'o')
-            ->where('o.bidding = :bidding')
-            ->setParameter('bidding', $bidding)
-            ->orderBy('u.price', 'desc')
-            ->getQuery()
-            ->getResult();
-    }
-
     /**
      * @param int|null $id
      * @return array|null
@@ -44,6 +33,5 @@ class BiddingRepository extends ServiceEntityRepository
             ->setParameter('id',$id)
             ->getQuery()
             ->getResult();
-
     }
 }

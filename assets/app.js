@@ -1,5 +1,6 @@
 import './css/app.scss';
 import './js/count-time.js'
+import '@fortawesome/fontawesome-free'
 
 $('[data-toggle="popover"]').popover({
     html: true,
