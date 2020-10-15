@@ -3,21 +3,21 @@
 
 namespace App\Tests\Controller;
 
-use App\Repository\CategoryRepository;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 class CategoryControllerTest extends WebTestCase
 {
+    use FixturesTrait;
 
-    public function testShowSuccess(): void
+    public function testCategoryShow()
     {
-        /** @var CategoryRepository $categoryRepo */
-        $client = static::createClient();
-        $categoryRepo = static::$container->get(CategoryRepository::class);
-        $category = $categoryRepo->findOneBy(['id' => 153]);
+        $client = $this->createClient();
+        $categories = $this->loadFixtureFiles([__DIR__ . '/CategoryRepositoryTestFixtures.yaml']);
+        $category = $categories['category1'];
         $client->request('GET',"/categorie/{$category->getSlug()}");
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertResponseStatusCodeSame(200);
+        $this->assertPageTitleContains("Catégorie: {$category->getSlug()}");
     }
 
 }

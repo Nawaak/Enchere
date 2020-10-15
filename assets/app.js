@@ -1,6 +1,7 @@
 import './css/app.scss';
 import './js/count-time.js'
 import '@fortawesome/fontawesome-free'
+import RemainingTime from "/js/count-time";
 
 $('[data-toggle="popover"]').popover({
     html: true,
@@ -17,3 +18,4 @@ $('html').on('click', function(e) {
     }
 });
 
+customElements.define('count-time',RemainingTime);

@@ -39,10 +39,13 @@
         "symfony/web-link": "5.1.*",
         "symfony/yaml": "5.1.*",
         "twig/extra-bundle": "^2.12|^3.0",
+        "twig/intl-extra": "^3.0",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "hautelook/alice-bundle": "^2.7",
+        "liip/test-fixtures-bundle": "^1.0.0",
         "phpstan/phpstan-doctrine": "^0.12.19",
         "phpstan/phpstan-symfony": "^0.12.7",
         "symfony/browser-kit": "^5.1",

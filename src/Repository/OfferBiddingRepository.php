@@ -28,13 +28,27 @@ class OfferBiddingRepository extends ServiceEntityRepository
     public function findOfferByBidding(?Bidding $bidding)
     {
         return $this->createQueryBuilder('u')
-            ->join(OfferBidding::class,'o')
             ->where('u.bidding = :bidding')
             ->setParameter('bidding', $bidding)
             ->orderBy('u.price', 'DESC')
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @param Bidding|null $bidding
+     * @return int|mixed|string
+     */
+    public function findLastOfferUser(?Bidding $bidding)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.bidding = :bidding')
+            ->setParameter('bidding', $bidding)
+            ->orderBy('u.price', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
     }
 
     /**

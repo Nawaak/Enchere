@@ -26,11 +26,16 @@
         </div>
         <section class="card-item">
             <div class="row">
+                {% if biddings is empty  %}
+                    <div class="text-center mx-auto">
+                        Actuellement aucune offre dans la catégorie: {{ category.name }}
+                    </div>
+                {% endif %}
                 {% for b in biddings %}
                     <div class="col-6 col-md-4 col-lg-3 mb-4">
                         <div class="card">
                             <div class="card-image">
-                                <span id="expireAt" data-expire="{{ b.expireAt | date }}"></span>
+                                <count-time expire="{{ b.expireAt | date }}" id="{{ b.id }}"></count-time>
                                 <img src="{{ b.image }}" alt="img" class="w-100 rounded-top">
                             </div>
                             <div class="bg-white py-2 text-center">

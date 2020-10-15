@@ -1,0 +1,5 @@
+App\Entity\Category:
+  category{1..10}:
+    name: <current()>
+    image: <imageUrl(250,250)>
+    slug: <slug()>

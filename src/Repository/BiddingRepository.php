@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Bidding;
-use App\Entity\OfferBidding;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -26,11 +25,12 @@ class BiddingRepository extends ServiceEntityRepository
      */
     public function findBiddingsWithCategory(?int $id)
     {
+        $now = new \DateTime('now');
         return $this->createQueryBuilder('t')
-            ->join(OfferBidding::class,'o')
-            ->orderBy('o.price','desc')
             ->where('t.category = :id')
             ->setParameter('id',$id)
+            ->andWhere("t.expireAt > :now")
+            ->setParameter('now',$now)
             ->getQuery()
             ->getResult();
     }

@@ -24,7 +24,7 @@ class TwigHideUsernameExtension extends AbstractExtension
      */
     public function hideName (string $name): ?string
     {
-        if(strlen($name) <= 5)
+        if(strlen($name) <= 6)
         {
             return mb_substr($name, 0, 1, 'UTF-8').str_repeat('*', strlen($name) - 2 ).mb_substr($name, mb_strlen($name) - 1, null, 'UTF-8');
         }

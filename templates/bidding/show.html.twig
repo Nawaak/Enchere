@@ -6,7 +6,7 @@
 <div class="container my-3">
     <div class="card">
         <div class="card-image">
-            <span id="expireAt" data-expire="{{ bidding.expireAt | date }}"></span>
+            <count-time expire="{{ bidding.expireAt | date }}"></count-time>
             <img src="{{ bidding.image }}" alt="img" class="w-100 rounded-top">
         </div>
         <div class="bg-white py-2 text-center">
@@ -17,7 +17,7 @@
             <p>{{ bidding.content }}</p>
             <p>Prix de départ: <span class="text-danger">{{ bidding.startPrice }} €</span></p>
             <div class="d-flex justify-content-end align-items-center card-body-action">
-                <button class="btn btn-sm btn-info text-white" id="js-show" data-toggle="popover" title="Faire une offre" data-placement="right" {% if bidding.expireAt | date < 'now'|date %} disabled > Expirer </button> {% else %} >Enchérir</button> {% endif %}
+                <button class="btn btn-sm btn-info text-white" id="js-show" data-toggle="popover" title="Faire une offre" data-placement="right" {% if bidding.expireAt | date < "now"|date %} disabled style="background-color: rgba(40, 167, 69, .8); border: none;"> Enchère terminée </button> {% else %} >Enchérir</button> {% endif %}
             </div>
         </div>
     </div>
@@ -29,6 +29,16 @@
             <span id="js-form-close" style="cursor:pointer;">X</span>
         </div>
     </div>
+
+    {% if bidding.expireAt | date < "now"|date %}
+        {% if bidding.offerBiddings is empty %}
+            <div>Aucune offre n'a étais faite sur cette offre</div>
+        {% else %}
+            <div class="alert alert-success mt-3">
+                {{ lastOffer[0].user.username | hide_name | capitalize }} a remporter l'offre au prix de {{ lastOffer[0].price }} €
+            </div>
+        {% endif %}
+    {% endif %}
 
     <section class="my-3">
         <div class="row">
