@@ -35,10 +35,10 @@
                     <div class="col-6 col-md-4 col-lg-3 mb-4">
                         <div class="card">
                             <div class="card-image">
-                                <count-time expire="{{ b.expireAt | date }}" id="{{ b.id }}"></count-time>
+                                <count-time expire="{{ b.expireAt | date('Y-m-d H:i:s') }}" id="{{ b.id }}"></count-time>
                                 <img src="{{ b.image }}" alt="img" class="w-100 rounded-top">
                             </div>
-                            <div class="bg-white py-2 text-center">
+                            <div class="bg-white py-2 text-center border-top border-bottom">
                                 Offre en cours: <span class="font-weight-bold text-danger">{{ findLastPrice(b)[0].price }}€
                                 </span>
                             </div>

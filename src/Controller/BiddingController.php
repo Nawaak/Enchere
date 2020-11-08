@@ -5,11 +5,8 @@ namespace App\Controller;
 use App\Entity\Bidding;
 use App\Repository\BiddingRepository;
 use App\Repository\OfferBiddingRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BiddingController extends AbstractController

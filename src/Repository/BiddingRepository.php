@@ -26,11 +26,12 @@ class BiddingRepository extends ServiceEntityRepository
     public function findBiddingsWithCategory(?int $id)
     {
         $now = new \DateTime('now');
+        $dateFormat = $now->format('Y-m-d H:i:s');
         return $this->createQueryBuilder('t')
             ->where('t.category = :id')
             ->setParameter('id',$id)
             ->andWhere("t.expireAt > :now")
-            ->setParameter('now',$now)
+            ->setParameter('now',$dateFormat)
             ->getQuery()
             ->getResult();
     }

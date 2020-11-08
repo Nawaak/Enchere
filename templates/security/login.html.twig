@@ -4,16 +4,11 @@
 
 {% block body %}
     <div class="container mt-4">
-        <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Espace de connexion</h1>
+        <hr>
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                </div>
             {% endif %}
 
             <div class="form-group">
@@ -25,9 +20,7 @@
                 <input type="password" name="password" id="inputPassword" class="form-control" required>
             </div>
 
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
             {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -40,10 +33,15 @@
             </div>
             #}
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">
+                <button class="btn btn-sm btn-primary" type="submit">
                     Se connecter
                 </button>
             </div>
         </form>
+        <hr>
+        <div class="my-2">
+            Vous n'avez pas encore de compte?
+            <a href="{{ path('register') }}" class="btn btn-sm btn-info">Creer un compte</a>
+        </div>
     </div>
 {% endblock %}

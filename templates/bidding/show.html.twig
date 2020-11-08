@@ -1,78 +1,120 @@
 {% extends 'base.html.twig' %}
+{% set expire = bidding.expireAt | date('Y-m-d H:i:s') <= 'now'|date('Y-m-d H:i:s') %}
 
 {% block title %}{{ parent() }} Offre {{ bidding.name | capitalize }}{% endblock %}
-
 {% block body %}
 <div class="container my-3">
-    <div class="card">
-        <div class="card-image">
-            <count-time expire="{{ bidding.expireAt | date }}"></count-time>
-            <img src="{{ bidding.image }}" alt="img" class="w-100 rounded-top">
-        </div>
-        <div class="bg-white py-2 text-center">
-            Offre en cours: <span class="font-weight-bold text-danger">{{ findLastPrice(bidding)[0].price }}€</span>
-        </div>
-        <div class="card-body rounded-bottom">
-            <h5>{{ bidding.name | capitalize }}</h5>
-            <p>{{ bidding.content }}</p>
-            <p>Prix de départ: <span class="text-danger">{{ bidding.startPrice }} €</span></p>
-            <div class="d-flex justify-content-end align-items-center card-body-action">
-                <button class="btn btn-sm btn-info text-white" id="js-show" data-toggle="popover" title="Faire une offre" data-placement="right" {% if bidding.expireAt | date < "now"|date %} disabled style="background-color: rgba(40, 167, 69, .8); border: none;"> Enchère terminée </button> {% else %} >Enchérir</button> {% endif %}
-            </div>
-        </div>
-    </div>
-
-
-    <div class="d-none mt-3" id="form-bid">
-        <div class="d-flex justify-content-between">
-            <h3>Indiquer le montant</h3>
-            <span id="js-form-close" style="cursor:pointer;">X</span>
-        </div>
-    </div>
-
-    {% if bidding.expireAt | date < "now"|date %}
+    {% if expire %}
         {% if bidding.offerBiddings is empty %}
             <div>Aucune offre n'a étais faite sur cette offre</div>
         {% else %}
             <div class="alert alert-success mt-3">
-                {{ lastOffer[0].user.username | hide_name | capitalize }} a remporter l'offre au prix de {{ lastOffer[0].price }} €
+                {{ lastOffer[0].user.username | hide_name | capitalize }} a remporter l'offre au prix de {{ lastOffer[0].price | format_currency('EUR',{fraction_digit: 0}) }}
             </div>
         {% endif %}
     {% endif %}
-
-    <section class="my-3">
-        <div class="row">
-            <div class="col-12 col-lg-4">
+    <div class="row">
+        <div class="col-12 col-lg-8">
+            <div class="card border-0">
+                <div class="card-image">
+                    <count-time expire="{{ bidding.expireAt | date('Y-m-d H:i:s') }}"></count-time>
+                    <img src="{{ bidding.image }}" alt="img" class="w-100 rounded-top">
+                </div>
+                <div class="bg-white py-2 text-center border-bottom border-top">
+                    Offre en cours: <span class="font-weight-bold text-danger" id="last-offer">{{ findLastPrice(bidding)[0].price | format_currency('EUR',{fraction_digit: 0}) }}</span>
+                </div>
+                <div class="card-body rounded-bottom">
+                    <h5>{{ bidding.name | capitalize }}</h5>
+                    <p>{{ bidding.content }}</p>
+                    <p>Prix de départ: <span class="text-danger">{{ bidding.startPrice | format_currency('EUR',{fraction_digit: 0}) }}</span></p>
+                    <offer-create data-id="{{ bidding.id }}" data-user="{{ app.user ? app.user.username : null }}"></offer-create>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 mt-2 mt-lg-0">
+            <div>
                 <h3>Les offres</h3>
                 <hr>
-                <ul class="list-group">
+                <ul class="list-group overflow-auto scrollbar" style="max-height: 197px;">
                     {% for o in offer %}
-                        <li class="list-group-item">{{ o.user.username | hide_name }}, a fait une offre de <b>{{ o.price }}€</b></li>  
+                        <li class="list-group-item">{{ o.user.username | hide_name }}, a fait une offre de <b>{{ o.price | format_currency('EUR',{fraction_digit: 0})}}</b></li>
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-12 col-lg-8 my-3 my-lg-0">
-            <h3>Contacter le vendeur</h3>
-            <hr>
-            {% if bidding.expireAt | date <= 'now'|date %}
-            <p>Vous ne pouvez plus contacter le vendeur, l'offre a expiré.</p>
-            {% else %}
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Adresse mail</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="email">
-                    <small id="emailHelp" class="form-text text-muted">Cette adresse mail servira au vendeur afin de vous répondre. </small>
+            <div class="mt-3">
+                <h3>Messagerie</h3>
+                <hr>
+                <div class="chat scrollbar">
+                    <div class="chat-body px-3">
+                        <div id="chat-messages">
+                            <div class="answer left">
+                                <div class="avatar">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="El puto bot">
+                                    <div class="status busy"></div>
+                                </div>
+                                <!--<div class="name">Moi</div>-->
+                                <div class="text px-3 py-2">
+                                    Mon message  Mon message  Mon message  Mon message  Mon message
+                                </div>
+                                <div class="time">Il y a 5 minutes</div>
+                            </div>
+                            <div class="answer right">
+                                <div class="avatar">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Usuario">
+                                    <div class="status online"></div>
+                                </div>
+                                <!--<div class="name">Moi</div>-->
+                                <div class="text bg-info text-left px-3 py-2">
+                                    Ca va?
+                                </div>
+                                <div class="time">Il y a 2 minutes</div>
+                            </div>
+                            </div>
+                            <div class="answer right">
+                                <div class="avatar">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Usuario">
+                                    <div class="status online"></div>
+                                </div>
+                                <!--<div class="name">Moi</div>-->
+                                <div class="text bg-info text-left px-3 py-2">
+                                    Ca va? &#128540
+                                </div>
+                                <div class="time">Il y a 2 minutes</div>
+                            </div>
+                            <div class="answer left">
+                                <div class="avatar">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="El puto bot">
+                                    <div class="status busy"></div>
+                                </div>
+                                <!--<div class="name">Moi</div>-->
+                                <div class="text px-3 py-2">
+                                    Mon message  Mon message  Mon message  Mon message  Mon message
+                                </div>
+                                <div class="time">Il y a 1 minutes</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Message</label>
-                    <textarea type="text" class="form-control" id="exampleInputPassword1"></textarea>
+                <div class="d-flex bg-light align-items-center p-2">
+                    <input placeholder="Tapez votre message" class="px-2 w-100 text-dark" style="outline: none; border:none; background-color: transparent" />
+                    <a class="" href="">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="#00000" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                    </a>
                 </div>
-                <button type="submit" class="btn btn-primary">Envoyer</button>
-            </form>
-            {% endif %}
             </div>
         </div>
-    </section>
+    </div>
 
 </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" defer>
+        const chat = document.querySelector('.chat')
+        chat.scrollTop = chat.scrollHeight
+    </script>
+{% endblock %}
+

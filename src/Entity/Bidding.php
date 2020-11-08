@@ -2,13 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\BiddingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BiddingRepository::class)
+ * @ApiResource(
+ *     collectionOperations={},
+ *     itemOperations={"get"},
+ *     normalizationContext={"groups"={"read:bidding","create:offer"}}
+ * )
  */
 class Bidding
 {
@@ -21,11 +28,13 @@ class Bidding
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("read:bidding")
      */
     private string $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("read:bidding")
      */
     private string $content;
 
@@ -37,16 +46,19 @@ class Bidding
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="biddings")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups("read:bidding")
      */
     private ?Category $category;
 
     /**
      * @ORM\Column(type="datetime",nullable=false)
+     * @Groups("read:bidding")
      */
     private \DateTimeInterface $expireAt;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("read:bidding")
      */
     private float $startPrice;
 
@@ -58,6 +70,8 @@ class Bidding
     /**
      * @ORM\OneToMany(targetEntity=OfferBidding::class, mappedBy="bidding")
      * @var Collection<int, OfferBidding>
+     * @Groups({"create:offer","read:bidding"})
+     *
      */
     private $offerBiddings;
 
@@ -185,5 +199,10 @@ class Bidding
         }
 
         return $this;
+    }
+
+    public function __sleep()
+    {
+        return [];
     }
 }

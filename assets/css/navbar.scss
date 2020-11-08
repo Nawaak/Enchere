@@ -1,26 +1,77 @@
-nav a {
+nav a
+{
   color: inherit;
 }
 
-.navbar-toggler-icon{
+button.navbar-toggler
+{
+  outline: none;
+}
+
+.navbar-toggler-icon
+{
   background:url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI2IDI2IiBpZD0i0KHQu9C+0LlfMSIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjYgMjYiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnPjxwYXRoIGQ9Ik0yNC4yNSwxMi4yNUgxLjc1QzEuMzM1OTM3NSwxMi4yNSwxLDEyLjU4NTkzNzUsMSwxM3MwLjMzNTkzNzUsMC43NSwwLjc1LDAuNzVoMjIuNSAgIGMwLjQxNDA2MjUsMCwwLjc1LTAuMzM1OTM3NSwwLjc1LTAuNzVTMjQuNjY0MDYyNSwxMi4yNSwyNC4yNSwxMi4yNXoiIGZpbGw9IiMxRDFEMUIiLz48cGF0aCBkPSJNMS43NSw3Ljc1aDIyLjVDMjQuNjY0MDYyNSw3Ljc1LDI1LDcuNDE0MDYyNSwyNSw3cy0wLjMzNTkzNzUtMC43NS0wLjc1LTAuNzVIMS43NSAgIEMxLjMzNTkzNzUsNi4yNSwxLDYuNTg1OTM3NSwxLDdTMS4zMzU5Mzc1LDcuNzUsMS43NSw3Ljc1eiIgZmlsbD0iIzFEMUQxQiIvPjxwYXRoIGQ9Ik0yNC4yNSwxOC4yNUgxLjc1QzEuMzM1OTM3NSwxOC4yNSwxLDE4LjU4NTkzNzUsMSwxOXMwLjMzNTkzNzUsMC43NSwwLjc1LDAuNzVoMjIuNSAgIGMwLjQxNDA2MjUsMCwwLjc1LTAuMzM1OTM3NSwwLjc1LTAuNzVTMjQuNjY0MDYyNSwxOC4yNSwyNC4yNSwxOC4yNXoiIGZpbGw9IiMxRDFEMUIiLz48L2c+PC9zdmc+');
 }
 
-.navbar-nav li{
+.navbar a
+{
+  text-decoration: none;
+}
+
+.navbar-nav li
+{
   margin-bottom: 0.5rem;
 }
 
-@media only screen and (min-width: 768px) {
-  .navbar-expand-md .navbar-collapse{
+.navbar-nav li.nav-item.hide
+{
+  display: none;
+}
+
+a.navbar-brand
+{
+  flex: 1 0 0;
+}
+
+@media only screen and (min-width: 768px)
+{
+  .navbar-profile
+  {
+    display: none;
+  }
+  .navbar-expand-md .navbar-collapse
+  {
     justify-content: flex-end;
     align-items: center;
     margin-top: 0 !important;
   }
-  .navbar-nav li{
+
+  .navbar-nav li
+  {
     margin-right: 5px;
     margin-bottom: 0;
+
+    a{
+      text-decoration: none;
+    }
+
   }
-  .navbar-nav li:last-child{
+
+  .navbar-nav li.nav-item.hide
+  {
+    display: block;
+  }
+
+  .navbar-nav li:last-child
+  {
     margin-right: 0;
+  }
+
+}
+
+@media screen and (min-width: 992px)
+{
+  span.profile-link {
+    display: none;
   }
 }

@@ -1,13 +1,22 @@
 const path = require('path')
-const cors = require('@koa/cors')
+const prefresh = require('@prefresh/vite')
+
 const root = './assets'
 
 /**
  * @type { import('vite').UserConfig }
  */
 const config = {
+    alias: {
+        'react': 'preact/compat',
+        'react-dom': 'preact/compat',
+    },
     root,
-    configureServer: function ({ root, app, watcher }) {
+    jsx: 'preact',
+    plugins: [prefresh()],
+    cors: true,
+    emitManifest: true,
+    configureServer: function ({ root, watcher }) {
         watcher.add(path.resolve(root, '../templates/**/*.twig'))
         watcher.on('change', function (path) {
             if (path.endsWith('.twig')) {
@@ -17,7 +26,6 @@ const config = {
                 })
             }
         })
-        app.use(cors({ origin: '*' }))
     }
 }
 
