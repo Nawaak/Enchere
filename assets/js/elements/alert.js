@@ -1,5 +1,3 @@
-import React from "preact/compat";
-
 export function Alert({message = '', type = 'success'}){
     const alert = document.createElement('div')
     alert.classList.add('alert')

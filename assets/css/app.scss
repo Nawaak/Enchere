@@ -7,55 +7,21 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-// a déplacer par la suite
-.fadein{
-    animation-name: fadeIn;
-    animation-duration: 1s;
-}
-.fadeOut{
-    animation-name: fadeOut;
-    animation-duration: 1.5s;
-}
+/**
+IMPORT
+ */
+@import "animations";
+@import "top-header";
+@import "categorie";
+@import "rating";
+@import "carousel";
+@import "last-offer";
+@import "navbar";
+@import "card";
 
-@keyframes fadeIn{
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-@keyframes fadeOut{
-    0% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-100px);
-    }
-}
-// a déplcer par la suite
-
-.popover {
-    max-width: 100%;
-}
-
-.hover-scale
-{
-    transition: transform .2s ease-in-out;
-    svg:hover{
-        transform: scale(1.15);
-    }
-    span:hover
-    {
-        transition: none;
-    }
-}
-
-.hover-red:hover{
-    color: var(--danger);
-}
+/**
+SCROLLBAR
+ */
 .scrollbar{
     &::-webkit-scrollbar {
         width: 3px;
@@ -70,46 +36,16 @@ body{
     &::-webkit-scrollbar-thumb {
         background: var(--info);
     }
-    &::-webkit-scrollbar-thumb:window-inactive {
-        background: red;
-    }
 }
-@import "top-header";
-@import "categorie";
-@import "rating";
-@import "carousel";
-@import "last-offer";
-@import "navbar";
-@import "card";
 
-.row.row-broken {
-    padding-bottom: 0;
-}
-.col-inside-lg {
-    padding: 20px;
-}
+
+/**
+CHAT
+ */
 .chat {
-    max-height: 300px;
+    height: calc(100% - 300px);
     overflow: auto;
     outline: none;
-}
-.decor-default {
-    background-color: #ffffff;
-}
-.chat-users h6 {
-    font-size: 20px;
-    margin: 0 0 20px;
-}
-.chat-users .user {
-    position: relative;
-    padding: 0 0 0 50px;
-    display: block;
-    cursor: pointer;
-    margin: 0 0 20px;
-}
-.chat-users .user .avatar {
-    top: 0;
-    left: 0;
 }
 .chat .avatar {
     width: 40px;
@@ -121,49 +57,26 @@ body{
     border-radius: 20px;
     height: 100%;
 }
-.chat .avatar .status.off {
-    border: 1px solid #5a5a5a;
-    background: #ffffff;
-}
-.chat .avatar .status.online {
-    background: #4caf50;
-}
-.chat .avatar .status.busy {
-    background: #ffc107;
-}
-.chat .avatar .status.offline {
-    background: #ed4e6e;
-}
-.chat-users .user .status {
-    bottom: 0;
-    left: 28px;
-}
-.chat .avatar .status {
+.status {
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    position: absolute;
 }
-.chat-users .user .name {
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.status.off {
+    border: 1px solid #5a5a5a;
+    background: #ffffff;
 }
-.chat-users .user .mood {
-    font: 200 14px/20px "Raleway", sans-serif;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.status.online {
+    background: #4caf50;
+}
+.status.busy {
+    background: #ffc107;
+}
+.status.offline {
+    background: #ed4e6e;
 }
 
 /*****************CHAT BODY *******************/
-.chat-body h6 {
-    font-size: 20px;
-    margin: 0 0 20px;
-}
 .chat-body .answer.left {
     padding: 0 0 0 58px;
     text-align: left;
@@ -301,21 +214,7 @@ body{
     background: url("http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/icon-41.png") 50% 50% no-repeat;
     right: 20px;
 }
-.chat input::-webkit-input-placeholder {
-    color: var(--dark);
-}
 
-.chat input:-moz-placeholder { /* Firefox 18- */
-    color: #fff;
-}
-
-.chat input::-moz-placeholder {  /* Firefox 19+ */
-    color: #fff;
-}
-
-.chat input:-ms-input-placeholder {
-    color: #fff;
-}
 .chat input {
     -webkit-appearance: none;
     border-radius: 0;
