@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ parent()}} Messagerie privée {% endblock %}
+{% block title %}
+    {{ parent()}}
+    Messagerie privée
+{% endblock %}
 
 {% block body %}
 
@@ -22,7 +25,7 @@
                         <span class="status busy mr-2"></span>
                         Christine
                     </li>
-                    <li class="list-group-item d-flex align-items-center">
+                    <li class="list-group-item active d-flex align-items-center">
                         <span class="status online mr-2"></span>
                         Julia
                     </li>
@@ -32,7 +35,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-lg-9 mt-2 pl-0">
+            <div class="col-12 col-lg-9 mt-2 pl-lg-0">
                 <div class="chat scrollbar">
                     <div class="chat-body px-3">
                         <div id="chat-messages">
@@ -140,5 +143,13 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" defer>
+        const chat = document.querySelector('.chat')
+        chat.scrollTop = chat.scrollHeight
+    </script>
+{% endblock %}
+

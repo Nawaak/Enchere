@@ -23,9 +23,10 @@ export default class RemainingTime extends HTMLElement {
         },1000)
     }
 
+
     disconnectedCallback() {
         clearInterval(this.count)
-        this.span.style.background = "rgba(40, 167, 69, .8)"
+        this.span.style.background = "rgba(255,10,14, .65)"
         this.span.innerHTML = "L'offre est désormais terminée"
     }
 

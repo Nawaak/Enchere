@@ -1,6 +1,6 @@
 import React from "preact/compat";
 import {render} from 'preact'
-import { Button, Popover, OverlayTrigger } from 'react-bootstrap'
+import {Button, Popover, OverlayTrigger} from 'react-bootstrap'
 import {useCallback, useRef} from "preact/hooks";
 import {useFetchOffer} from "../hooks/fetchUrl";
 import {hideUsername} from "../functions/hideUsername";
@@ -30,7 +30,7 @@ const Offer = ({bidding, user}) => {
                 row.classList.remove('text-primary')
             }, 3000)
         }
-        new Alert({message:'Votre offre à bien été pris en compte', type: 'info'})
+        Alert({message:'Votre offre à bien été prise en compte'})
     })
 
     const handleSubmit = useCallback(async () => {
@@ -49,9 +49,9 @@ const Offer = ({bidding, user}) => {
     const popover = <Popover id="popover-basic" show={false}>
             <Popover.Title as="h3">Faire une offre</Popover.Title>
             <Popover.Content>
-                <div className="d-flex align-items-around flex-grow-1 w-100">
+                <div className="d-flex justify-content-between">
                     <input type="text" className="form-control form-control-sm" ref={price} onKeyPress={e => handleKey(e)} placeholder="Entrer un montant" />
-                    <button className="btn btn-sm btn-success text-white ml-2" id="js-valid-offer" disabled={loading} onClick={handleSubmit}>Valider</button>
+                    <button className="btn btn-sm btn-info text-white ml-2" id="js-valid-offer" disabled={loading} onClick={handleSubmit}>Valider</button>
                     <button className="btn btn-sm btn-danger text-white ml-2" id="js-cancel-offer" onClick={() => document.body.click()}>Annuler</button>
                 </div>
             </Popover.Content>
@@ -59,7 +59,7 @@ const Offer = ({bidding, user}) => {
 
     return <div className={'d-flex justify-content-end'}>
         <OverlayTrigger trigger="click" placement="auto" rootClose overlay={popover} onHide>
-            <Button variant="success" className={'btn-sm'}>Faire une offre</Button>
+            <Button variant="info" className={'btn-sm'}>Faire une offre</Button>
         </OverlayTrigger>
     </div>
 }

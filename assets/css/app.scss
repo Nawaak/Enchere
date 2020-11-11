@@ -7,6 +7,15 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+::selection{
+    background-color: var(--info);
+}
+
+.popover{
+    max-width: 100%;
+}
+
+
 /**
 IMPORT
  */
