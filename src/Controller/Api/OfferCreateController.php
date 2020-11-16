@@ -45,12 +45,11 @@ class OfferCreateController extends AbstractController
         $data->setUser($user);
 
         $now = new \DateTime('now');
-        $expireAt = $data->getBidding()->getExpireAt();
 
         $lastOffer = $repo->findLastOffer($data->getBidding());
 
         // Si l'offre à expirer, on retourne un JSON (422), enchère impossible
-        if($expireAt->format('Y m d h:i:s') <= $now->format('Y m d h:i:s')){
+        if($data->getBidding()->getExpireAt()->format('Y m d h:i:s') <= $now->format('Y m d h:i:s')){
             return new JsonResponse(['type' => 'danger', 'message' => "L'enchère a expirer, vous ne pouvez plus faire d'offre"], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         // Si le prix proposer est inférieur ou égale a la derniere offre on retourne en JSON
