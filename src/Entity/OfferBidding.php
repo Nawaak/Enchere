@@ -13,8 +13,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     collectionOperations={
  *     "post"={
             "controller"=App\Controller\Api\OfferCreateController::class,
+ *          "route_name"="offer_bidding_post_publication",
  *          "security"="is_granted('ROLE_USER')",
- *          "security_message"="Vous devez être authentifié pour pouvoir enchérir"
+ *          "security_message"="Vous devez être authentifié pour pouvoir enchérir",
  *     },
  * },
  *     normalizationContext={"groups"={"create:offer"}},
@@ -32,7 +33,7 @@ class OfferBidding
     private int $id;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float")
      * @Groups("create:offer")
      */
     private float $price;

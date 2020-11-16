@@ -25,7 +25,7 @@ class BiddingController extends AbstractController
         ]);
 
         $offer = $offerBiddingRepo->findOfferByBidding($bidding);
-        $lastOffer = $offerBiddingRepo->findLastOfferUser($bidding);
+        $lastOffer = $offerBiddingRepo->findLastOffer($bidding);
 
         return $this->render('bidding/show.html.twig',compact('bidding','offer','lastOffer'));
     }
