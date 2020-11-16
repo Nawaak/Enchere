@@ -1,7 +1,8 @@
 import { useState } from "preact/compat";
 import { useCallback } from "preact/hooks";
+import { Alert } from "/js/elements/alert";
 
-async function jsonLdFetch(url, method = 'GET', data = null){
+async function jsonLdFetch(url, method = 'GET', data = null, callback = null){
     const params = {
         method,
         headers: {
@@ -10,38 +11,39 @@ async function jsonLdFetch(url, method = 'GET', data = null){
         }
     }
 
+    if(method === 'POST' && user === 0){
+        return new Promise((resolve) => {
+            Alert({type: 'danger', message: 'Vous devez être authentifié pour continuer, vous allez être redirigez vers la page de connexion'})
+            setTimeout(() => {
+                resolve(document.location.href = '/login')
+            }, 3000)
+        })
+    }
+
     if(data) {
         params.body = JSON.stringify(data)
     }
-
     const response = await fetch(url, params)
-    if(response.status === 204){
-        return null;
-    }
-    if(response.redirected) {
-        window.location.href = response.url;
-    }
     const responseData = await response.json()
+
     if(response.ok){
+        callback()
         return responseData
     }else{
-        throw responseData
+        Alert({type: responseData.type, message: responseData.message})
     }
 }
 
 export function useFetchOffer(url, method = 'POST', callback = null) {
     const [loading, setLoading] = useState(false);
     const load = useCallback(async (data) => {
-        setLoading(true)
         try {
-            const response = await jsonLdFetch(url, method, data)
-            if(callback){
-                callback(response)
-            }
-            setLoading(false)
-        }catch (e){
-            setLoading(false)
+            setLoading(true)
+            await jsonLdFetch(url, method, data, callback)
+        }catch (e) {
+            console.log(e)
         }
+        setLoading(false)
     }, [url, method, callback])
 
     return {
