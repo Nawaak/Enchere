@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ApiResource()
  */
 class User implements UserInterface
 {
@@ -49,9 +51,15 @@ class User implements UserInterface
      */
     private string $username;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Bidding::class, mappedBy="user")
+     */
+    private $biddings;
+
     public function __construct()
     {
         $this->offerBiddings = new ArrayCollection();
+        $this->biddings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,6 +174,37 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bidding[]
+     */
+    public function getBiddings(): Collection
+    {
+        return $this->biddings;
+    }
+
+    public function addBidding(Bidding $bidding): self
+    {
+        if (!$this->biddings->contains($bidding)) {
+            $this->biddings[] = $bidding;
+            $bidding->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBidding(Bidding $bidding): self
+    {
+        if ($this->biddings->contains($bidding)) {
+            $this->biddings->removeElement($bidding);
+            // set the owning side to null (unless already changed)
+            if ($bidding->getUser() === $this) {
+                $bidding->setUser(null);
+            }
+        }
 
         return $this;
     }

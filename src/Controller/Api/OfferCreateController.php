@@ -4,11 +4,14 @@ namespace App\Controller\Api;
 
 use App\Entity\OfferBidding;
 use App\Entity\User;
+use App\Event\OfferCreateEvent;
 use App\Repository\OfferBiddingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
@@ -26,7 +29,7 @@ class OfferCreateController extends AbstractController
 
     /**
      * @Route(
-     *     name="api_offer_biddings_post_publication",
+     *     name="offer_bidding_post_publication",
      *     path="/api/offer_biddings",
      *     methods={"POST"},
      *     defaults={
@@ -36,9 +39,10 @@ class OfferCreateController extends AbstractController
      * )
      * @param OfferBidding $data
      * @param OfferBiddingRepository $repo
+     * @param EventDispatcherInterface $dispatch
      * @return OfferBidding|JsonResponse
      */
-    public function __invoke(OfferBidding $data, OfferBiddingRepository $repo)
+    public function __invoke(OfferBidding $data, OfferBiddingRepository $repo, EventDispatcherInterface $dispatch)
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -56,6 +60,8 @@ class OfferCreateController extends AbstractController
         if($data->getPrice() <= $lastOffer[0]->getPrice()){
             return new JsonResponse(['type' => 'danger', 'message' => 'Votre enchère doit être supérieur a la derniere offre'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+
+        $dispatch->dispatch(new OfferCreateEvent($data));
 
         return $data;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\BiddingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,7 +15,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     collectionOperations={},
  *     itemOperations={"get"},
- *     normalizationContext={"groups"={"read:bidding","create:offer"}}
  * )
  */
 class Bidding
@@ -28,7 +28,7 @@ class Bidding
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read:bidding")
+     * @Groups({"read:bidding"})
      */
     private string $name;
 
@@ -70,10 +70,15 @@ class Bidding
     /**
      * @ORM\OneToMany(targetEntity=OfferBidding::class, mappedBy="bidding")
      * @var Collection<int, OfferBidding>
-     * @Groups({"create:offer","read:bidding"})
+     * @Groups({"read:bidding"})
      *
      */
     private $offerBiddings;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="biddings")
+     */
+    private $user;
 
     public function __construct()
     {
@@ -204,5 +209,17 @@ class Bidding
     public function __sleep()
     {
         return [];
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

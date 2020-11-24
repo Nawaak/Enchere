@@ -53,9 +53,10 @@ class CategoryFixtures extends Fixture
                     ->setImage('https://mdbootstrap.com/img/Photos/Others/photo' . mt_rand(1, 9) . '.jpg')
                     ->setContent($faker->text(400))
                     ->setCategory($category)
-                    ->setExpireAt($faker->dateTimeBetween('now', '+ 50 minutes', 'Europe/Paris'))
+                    ->setExpireAt($faker->dateTimeBetween('now', '+1 month', 'Europe/Paris'))
                     ->setExpire(false)
-                    ->setStartPrice($faker->randomFloat(0,100,1000));
+                    ->setStartPrice($faker->randomFloat(0,100,1000))
+                    ->setUser($faker->randomElement($users));
                 $manager->persist($bidding);
 
                 for ($o = 0; $o <= mt_rand(2, 6); $o++) {

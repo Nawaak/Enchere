@@ -11,7 +11,7 @@ async function jsonLdFetch(url, method = 'GET', data = null, callback = null){
         }
     }
 
-    if(method === 'POST' && user === 0){
+    if(method !== 'GET' && user === 0){
         return new Promise((resolve) => {
             Alert({type: 'danger', message: 'Vous devez être authentifié pour continuer, vous allez être redirigez vers la page de connexion'})
             setTimeout(() => {

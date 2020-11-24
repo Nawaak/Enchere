@@ -11,14 +11,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=OfferBiddingRepository::class)
  * @ApiResource(
  *     collectionOperations={
- *     "post"={
-            "controller"=App\Controller\Api\OfferCreateController::class,
- *          "route_name"="offer_bidding_post_publication",
- *          "security"="is_granted('ROLE_USER')",
- *          "security_message"="Vous devez être authentifié pour pouvoir enchérir",
+ *           "post"={
+ *              "controller"=App\Controller\Api\OfferCreateController::class,
+ *              "route_name"="offer_bidding_post_publication",
+ *              "security"="is_granted('ROLE_USER')",
+ *              "security_message"="Vous devez être authentifié pour pouvoir enchérir",
+ *         },
  *     },
- * },
- *     normalizationContext={"groups"={"create:offer"}},
+ *     normalizationContext={"groups"={"create:offer","read:bidding"}},
  *     itemOperations={"get"},
  * )
  */
@@ -26,11 +26,11 @@ class OfferBidding
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      * @Groups("create:offer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="float")
@@ -41,13 +41,13 @@ class OfferBidding
     /**
      * @ORM\ManyToOne(targetEntity=Bidding::class, inversedBy="offerBiddings")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("create:offer")
      */
     private ?Bidding $bidding;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="offerBiddings")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("create:offer")
      */
     private ?User $user;
 

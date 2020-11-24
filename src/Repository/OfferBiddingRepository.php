@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Bidding;
 use App\Entity\OfferBidding;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -23,17 +24,16 @@ class OfferBiddingRepository extends ServiceEntityRepository
 
     /**
      * @param Bidding|null $bidding
-     * @return int|mixed|string
+     * @return int|mixed|string|array
      */
     public function findOfferByBidding(?Bidding $bidding)
     {
         return $this->createQueryBuilder('u')
             ->where('u.bidding = :bidding')
             ->setParameter('bidding', $bidding)
-            ->orderBy('u.price', 'DESC')
+            ->orderBy('u.price','DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     /**
@@ -49,5 +49,18 @@ class OfferBiddingRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findOfferUserExcerptCurrentUser(?Bidding $bidding, User $user)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.bidding = :bidding')
+            ->setParameter('bidding', $bidding)
+            ->andWhere('u.user != :user')
+            ->setParameter('user', $user)
+            ->orderBy('u.price', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }
