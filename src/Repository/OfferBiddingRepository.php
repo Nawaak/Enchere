@@ -51,6 +51,11 @@ class OfferBiddingRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @param Bidding|null $bidding
+     * @param User $user
+     * @return int|mixed|string
+     */
     public function findOfferUserExcerptCurrentUser(?Bidding $bidding, User $user)
     {
         return $this->createQueryBuilder('u')

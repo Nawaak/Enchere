@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\BiddingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -73,12 +72,12 @@ class Bidding
      * @Groups({"read:bidding"})
      *
      */
-    private $offerBiddings;
+    private Collection $offerBiddings;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="biddings")
      */
-    private $user;
+    private ?User $user;
 
     public function __construct()
     {

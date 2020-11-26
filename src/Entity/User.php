@@ -12,7 +12,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *     itemOperations={"get"},
+ *     collectionOperations={}
+ * )
  */
 class User implements UserInterface
 {
@@ -53,13 +56,21 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Bidding::class, mappedBy="user")
+     * @var Collection<int, Bidding>
      */
     private $biddings;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="user")
+     * @var Collection<int, Notification>
+     */
+    private $notifications;
 
     public function __construct()
     {
         $this->offerBiddings = new ArrayCollection();
         $this->biddings = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,6 +214,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($bidding->getUser() === $this) {
                 $bidding->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
             }
         }
 

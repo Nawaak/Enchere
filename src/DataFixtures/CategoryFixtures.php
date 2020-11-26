@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Bidding;
 use App\Entity\Category;
+use App\Entity\Notification;
 use App\Entity\OfferBidding;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -41,10 +42,18 @@ class CategoryFixtures extends Fixture
             $users[] = $user;
         }
 
+        for ($i = 0; $i <= 29; $i++) {
+            $notification = new Notification();
+            $notification->setUser($faker->randomElement($users))
+                ->setCreatedAt($faker->dateTimeBetween('- 7 day', 'now', 'Europe/Paris'))
+                ->setMessage($faker->sentence(6));
+            $manager->persist($notification);
+        }
+
         for ($i = 0; $i <= 3; $i++) {
             $category = new Category();
             $category->setName($faker->word())
-                ->setImage('https://mdbootstrap.com/img/Photos/Others/photo' . mt_rand(4, 15) . '.jpg');
+                     ->setImage('https://mdbootstrap.com/img/Photos/Others/photo' . mt_rand(4, 15) . '.jpg');
             $manager->persist($category);
 
             for ($b = 0; $b <= mt_rand(8, 15); $b++) {
