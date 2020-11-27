@@ -51,9 +51,6 @@ class MercureSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param OfferCreateEvent $event
-     */
     public function onOfferCreate(OfferCreateEvent $event): void{
         $offer = $event->getOfferBidding();
         /** @var User $user */
@@ -83,10 +80,10 @@ class MercureSubscriber implements EventSubscriberInterface
             $this->publisher->__invoke($update);
         }
         // On boucle sur les instances Utilisateurs et on enregistre les notifiacation en base
-        foreach ($u as $k => $v){
+        foreach (array_unique($u, SORT_REGULAR) as $k => $v){
             /** @var User $v */
             $notification = new Notification();
-            $notification->setMessage("Une nouvelle offre a été faite sur l'offre:&nbsp;<a href='$link'>$name</a>")
+            $notification->setMessage("Une personne a surenchéri sur l'annonce <b>$name</b> à laquel vous avez participé <a href='$link'>Voir l'offre</a>")
                 ->setCreatedAt(new \DateTime("now"))
                 ->setUser($v);
             $this->em->persist($notification);
