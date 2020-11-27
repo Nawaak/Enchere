@@ -1,0 +1,20 @@
+a.notification{
+  position: relative;
+}
+
+.badge-notification{
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background-color: var(--info);
+  font-size: 0.6rem;
+  font-weight: bold;
+}
