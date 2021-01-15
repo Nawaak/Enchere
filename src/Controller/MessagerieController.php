@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @IsGranted("ROLE_USER")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class MessagerieController extends AbstractController
 {

@@ -11,9 +11,14 @@
         <h1>Mes notifications</h1>
         {% for n in notification %}
             <div class="card my-2">
-                <div class="p-4 d-flex align-items-center justify-content-start ">
-                    <span style="width: 12px; height: 12px; background-color: var(--success); border-radius: 50%;" class="mx-2"></span>
-                    {{ n.message | raw }}, reçu le {{ n.createdAt | date('d F Y à H:i') }}
+                <div class="p-4 align-items-start justify-content-center flex-column">
+                    <div>
+                        <span style="width: 11px; height: 11px; background-color: var(--info); margin-bottom: -1px; border-radius: 50%; display: inline-block;" class="mr-1"></span>
+                        {{ n.message | raw }}
+                    </div>
+                    <div>
+                        <span class="text-muted"> {{ n.createdAt | ago }}</span>
+                    </div>
                 </div>
             </div>
         {% endfor %}

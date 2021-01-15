@@ -64,6 +64,7 @@ class OfferBiddingRepository extends ServiceEntityRepository
             ->andWhere('u.user != :user')
             ->setParameter('user', $user)
             ->orderBy('u.price', 'DESC')
+            ->groupBy('u.user')
             ->getQuery()
             ->getResult()
         ;

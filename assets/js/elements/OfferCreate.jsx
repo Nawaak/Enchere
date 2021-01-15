@@ -2,13 +2,13 @@ import React from "preact/compat";
 import {render} from 'preact'
 import {Button, Popover, OverlayTrigger} from 'react-bootstrap'
 import {useCallback, useRef} from "preact/hooks";
-import {useFetchOffer} from "../hooks/fetchUrl";
+import {useFetchOffer} from "../hooks/fetchUrl.jsx";
 import {hideUsername} from "../functions/hideUsername";
 import {Alert} from '../elements/alert'
 
 const Offer = ({bidding, user}) => {
     const price = useRef(0)
-    const {loading, load} = useFetchOffer('http://localhost:8000/api/offer_biddings', 'POST', () => {
+    const {loading, load} = useFetchOffer('/api/offer_biddings', 'POST', () => {
         // callback pour alert + ajout du <li> qui affiche les l'enchere effectuée
         document.body.click()
         const hiddenUsername = hideUsername(user)
@@ -18,8 +18,8 @@ const Offer = ({bidding, user}) => {
         row.classList.add('list-group-item')
         row.classList.add('text-primary')
         row.innerHTML = `
-        ${hiddenUsername}, a fait une offre de <b>${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' , minimumFractionDigits: 0}).format(price.current.value) }</b>
-    `
+            ${hiddenUsername}, a fait une offre de <b>${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' , minimumFractionDigits: 0}).format(price.current.value) }</b>
+        `
         last.innerHTML = `${new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' , minimumFractionDigits: 0}).format(price.current.value)}`
         ul.prepend(row)
         row.classList.add('fadein')
@@ -37,7 +37,7 @@ const Offer = ({bidding, user}) => {
             price: parseInt(price.current.value, 10),
             bidding: '/api/biddings/' + parseInt(bidding, 10)
         })
-    }, [load, price, bidding])
+    }, [load])
 
     const handleKey = async(e) => {
         if(e.key === 'Enter'){

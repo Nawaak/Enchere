@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     collectionOperations={},
  *     itemOperations={"get"},
+ *     normalizationContext={"groups"={"read:bidding"}}
  * )
  */
 class Bidding
@@ -22,12 +23,13 @@ class Bidding
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("read:bidding")
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:bidding"})
+     * @Groups({"read:bidding","read:offer"})
      */
     private string $name;
 

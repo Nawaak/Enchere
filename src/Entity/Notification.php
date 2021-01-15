@@ -2,13 +2,27 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\NotificationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     itemOperations={
+ *          "get"={
+ *
+ *     },
+ *     "put"
+ *     },
+ *     collectionOperations={"post","get"},
+ * )
+ * @ApiFilter(SearchFilter::class, properties={"user.id": "exact", "read": "exact"})
+ * @ApiFilter(OrderFilter::class, properties={"id"})
  * @ORM\Entity(repositoryClass=NotificationRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Notification
 {
@@ -33,6 +47,18 @@ class Notification
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
      */
     private ?User $user;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $read;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist(): void{
+        $this->setRead(false);
+    }
 
     public function getId(): ?int
     {
@@ -71,6 +97,18 @@ class Notification
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getRead(): ?bool
+    {
+        return $this->read;
+    }
+
+    public function setRead(?bool $read): self
+    {
+        $this->read = $read;
 
         return $this;
     }

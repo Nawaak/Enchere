@@ -8,14 +8,14 @@ use Twig\TwigFilter;
 class TwigTimeAgoExtension extends AbstractExtension
 {
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('ago', [$this, 'timeAgo'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function timeAgo(\DateTimeInterface $date, $prefix = '')
+    public function timeAgo(\DateTimeInterface $date, string $prefix = ''): string
     {
         $prefixAttribute = !empty($prefix) ? "prefix=\"{$prefix}\"" : '';
 

@@ -46,7 +46,8 @@ class CategoryFixtures extends Fixture
             $notification = new Notification();
             $notification->setUser($faker->randomElement($users))
                 ->setCreatedAt($faker->dateTimeBetween('- 7 day', 'now', 'Europe/Paris'))
-                ->setMessage($faker->sentence(6));
+                ->setMessage($faker->sentence(6))
+                ->setRead($faker->boolean(50));
             $manager->persist($notification);
         }
 

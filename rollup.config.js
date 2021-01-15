@@ -3,30 +3,39 @@ import postcss from 'rollup-plugin-postcss'
 import rootImport from 'rollup-plugin-root-import'
 import babel from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
+import preact from "rollup-plugin-preact";
+
 
 const sources = ['app']
 
 export default sources.map(source => ({
-    input: `assets/${source}.js`,
+    input: `./assets/${source}.js`,
     output: {
         dir: 'public/assets',
-        format: 'es'
+        format: 'es',
     },
     preserveEntrySignatures: false,
     plugins: [
         rootImport({
-            root: `assets`
+            root: `assets`,
+        }),
+        preact({
+            usePreactX: true,
+            noPropTypes: false,
+            noReactIs: true,
+            noEnv: true,
+            resolvePreactCompat: true,
         }),
         resolve(),
         commonjs(),
         postcss({
-            extract: true
+            extract: true,
+            plugins: [],
+            use: ['sass'],
         }),
         babel({
-            babelHelpers: 'bundled',
-            exclude: [
-                'node_modules/**'
-            ]
-        })
+            babelHelpers: "bundled",
+            exclude: ["node_modules/**"],
+        }),
     ]
 }))

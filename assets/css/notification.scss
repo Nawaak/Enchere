@@ -1,4 +1,4 @@
-a.notification{
+.notification{
   position: relative;
 }
 
@@ -10,6 +10,7 @@ a.notification{
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 2px;
   color: var(--white);
   height: 14px;
   width: 14px;
@@ -17,4 +18,123 @@ a.notification{
   background-color: var(--info);
   font-size: 0.6rem;
   font-weight: bold;
+}
+
+.notification-drop{
+  position: absolute;
+  top: 36px;
+  left: calc(-105px + 8px);
+  width: 210px;
+  font-size: 13px;
+  background-color: var(--light);
+  @extend .shadow;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 9999;
+
+  &::before{
+    content: '';
+    position: absolute;
+    top: -12px;
+    right: calc(50% - 8px);
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url("../../image/caret.svg");
+  }
+
+}
+
+.notification-title{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+
+  span{
+    display: none;
+  }
+}
+.notification-body{
+  @extend .scrollbar;
+  height: 220px;
+  overflow-y: auto;
+}
+.notification-body ul{
+  padding: 0;
+}
+.notification-body ul > *{
+  @extend .border-bottom;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.notification-body ul a:hover{
+  color: var(--info);
+  background-color: rgba(0,0,0,0.05);
+}
+.notification-body ul a li > *{
+  padding: 0 15px;
+}
+.notification-body ul a li p,
+.notification-body ul a li{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+.notification-body ul a:last-child{
+  margin-bottom: 0;
+  border: none !important;
+}
+.notification-body ul a li span{
+  @extend .text-muted
+}
+.notification-body ul a li p{
+  margin-bottom: 0;
+}
+.notification-footer{
+  display: block;
+  width: 100%;
+}
+.notification-footer a{
+  @extend .border-top;
+  @extend .rounded-bottom;
+  color: var(--dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: var(--light);
+}
+.notification-footer a:hover{
+  background-color: rgba(0,0,0,0.05);
+  color: var(--info);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 850px){
+  .notification-drop{
+    &::before{
+      display: none;
+    }
+    position: fixed;
+    top: 0;
+    left: auto;
+    right: 0;
+    bottom: 0;
+  }
+  .notification-title span{
+    display: block;
+    position: absolute;
+    right: 0.75rem;
+  }
+  .notification-title span:hover{
+    cursor: pointer;
+  }
+  .notification-body{
+    height: calc(100% - 84px);
+  }
 }

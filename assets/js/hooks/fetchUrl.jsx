@@ -1,8 +1,8 @@
 import { useState } from "preact/compat";
 import { useCallback } from "preact/hooks";
-import { Alert } from "/js/elements/alert";
+import { Alert } from "../elements/alert";
 
-async function jsonLdFetch(url, method = 'GET', data = null, callback = null){
+export async function jsonLdFetch(url, method = 'GET', data = null, callback= null){
     const params = {
         method,
         headers: {
@@ -27,10 +27,12 @@ async function jsonLdFetch(url, method = 'GET', data = null, callback = null){
     const responseData = await response.json()
 
     if(response.ok){
-        callback()
+        if(callback){
+            callback()
+        }
         return responseData
     }else{
-        Alert({type: responseData.type, message: responseData.message})
+        Alert({type: responseData.type || 'danger', message: responseData.message || responseData["hydra:description"] || 'Une erreur est survenue'})
     }
 }
 
@@ -41,7 +43,7 @@ export function useFetchOffer(url, method = 'POST', callback = null) {
             setLoading(true)
             await jsonLdFetch(url, method, data, callback)
         }catch (e) {
-            console.log(e)
+            console.error(e)
         }
         setLoading(false)
     }, [url, method, callback])
@@ -51,3 +53,4 @@ export function useFetchOffer(url, method = 'POST', callback = null) {
         load
     }
 }
+

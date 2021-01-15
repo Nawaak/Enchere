@@ -2,15 +2,15 @@
 
 namespace App\Mercure;
 
-use App\Entity\Notification;
 use App\Entity\User;
 use App\Event\OfferCreateEvent;
+use App\Repository\NotificationRepository;
 use App\Repository\OfferBiddingRepository;
+use App\Service\NotificationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mercure\PublisherInterface;
-use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -24,6 +24,11 @@ class MercureSubscriber implements EventSubscriberInterface
     private EventDispatcherInterface $dispatcher;
     private EntityManagerInterface $em;
     private UrlGeneratorInterface $urlGenerator;
+    private NotificationRepository $notificationRepository;
+    /**
+     * @var NotificationService
+     */
+    private NotificationService $notificationService;
 
     public function __construct(
         SerializerInterface $serializer,
@@ -32,7 +37,9 @@ class MercureSubscriber implements EventSubscriberInterface
         Security $security,
         EventDispatcherInterface $dispatcher,
         EntityManagerInterface $em,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        NotificationRepository $notificationRepository,
+        NotificationService $notificationService
     )
     {
         $this->serializer = $serializer;
@@ -42,9 +49,11 @@ class MercureSubscriber implements EventSubscriberInterface
         $this->dispatcher = $dispatcher;
         $this->em = $em;
         $this->urlGenerator = $urlGenerator;
+        $this->notificationRepository = $notificationRepository;
+        $this->notificationService = $notificationService;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             OfferCreateEvent::class => ['onOfferCreate'],
@@ -52,42 +61,14 @@ class MercureSubscriber implements EventSubscriberInterface
     }
 
     public function onOfferCreate(OfferCreateEvent $event): void{
-        $offer = $event->getOfferBidding();
         /** @var User $user */
         $user = $this->security->getUser();
         $name = $event->getBidding()->getName();
-        $link = $this->urlGenerator->generate('bidding_show', ['bidding' => $offer->getBidding()->getId()]);
         $users = $this->offerBiddingRepository->findOfferUserExcerptCurrentUser($event->getBidding(), $user);
 
-        // Tableau qui contiendra les ID utilisateur
-        $ids = [];
-        // Tableau qui contiendra l'instance de l'utilisateur
-        $u = [];
-        // Boucle sur tous les utilisateurs qui ont participé a une annonce et push sur un tableau
-        for ($i = 0; $i < count($users); $i++){
-            array_push($ids, $users[$i]->getUser()->getId());
-            array_push($u, $users[$i]->getUser());
+        // On boucle sur les instances Utilisateurs on enregistre les notifiacation en base et on notifie les utilisateur
+        foreach ($users as $v){
+            $this->notificationService->notifyUser($v->getUser(), "Quelqu'un a surenchéri sur l'annonce <strong>{$name}</strong> à laquel vous avez participé");
         }
-        // On boucle sur les id(User::class) ayant participé a une annonce et on publie sur mercure
-        foreach (array_unique($ids) as $key => $value){
-            $update = new Update("/notifications/user/$value", $this->serializer->serialize([
-                'type' => 'notification',
-                'data' => $offer
-            ], 'json', [
-                'iri' => false
-            ]));
-
-            $this->publisher->__invoke($update);
-        }
-        // On boucle sur les instances Utilisateurs et on enregistre les notifiacation en base
-        foreach (array_unique($u, SORT_REGULAR) as $k => $v){
-            /** @var User $v */
-            $notification = new Notification();
-            $notification->setMessage("Une personne a surenchéri sur l'annonce <b>$name</b> à laquel vous avez participé <a href='$link'>Voir l'offre</a>")
-                ->setCreatedAt(new \DateTime("now"))
-                ->setUser($v);
-            $this->em->persist($notification);
-        }
-        $this->em->flush();
     }
 }

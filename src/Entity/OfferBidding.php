@@ -6,20 +6,23 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\OfferBiddingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OfferBiddingRepository::class)
  * @ApiResource(
  *     collectionOperations={
  *           "post"={
+ *              "method"="POST",
  *              "controller"=App\Controller\Api\OfferCreateController::class,
  *              "route_name"="offer_bidding_post_publication",
  *              "security"="is_granted('ROLE_USER')",
  *              "security_message"="Vous devez être authentifié pour pouvoir enchérir",
  *         },
  *     },
- *     normalizationContext={"groups"={"create:offer","read:bidding"}},
  *     itemOperations={"get"},
+ *     denormalizationContext={"groups"={"create:offer"}},
+ *     normalizationContext={"groups"={"read:offer"}}
  * )
  */
 class OfferBidding
@@ -34,20 +37,22 @@ class OfferBidding
 
     /**
      * @ORM\Column(type="float")
-     * @Groups("create:offer")
+     * @Groups({"create:offer","read:offer"})
+     * @Assert\NotBlank()
      */
     private float $price;
 
     /**
      * @ORM\ManyToOne(targetEntity=Bidding::class, inversedBy="offerBiddings")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("create:offer")
+     * @Groups({"create:offer","read:offer"})
      */
     private ?Bidding $bidding;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="offerBiddings")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("read:offer")
      */
     private ?User $user;
 

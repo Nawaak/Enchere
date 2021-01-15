@@ -6,13 +6,14 @@ export function Alert({message = '', type = 'success'}){
     alert.style.top = '10px'
     alert.style.right = '10px'
     alert.innerHTML = `${message}`
-    alert.classList.add('fadeIn')
+    alert.classList.add('fadein')
     document.body.appendChild(alert)
     setTimeout(() => {
-        alert.classList.remove('fadeIn')
+        alert.classList.remove('fadein')
         alert.classList.add('fadeOut')
         alert.onanimationend = function () {
             alert.parentNode.removeChild(this)
         }
     },4000)
 }
+
