@@ -1,6 +1,7 @@
 import React from "preact/compat";
 import {useCallback, useEffect, useState} from "preact/hooks";
 import {jsonLdFetch} from "../hooks/fetchUrl.jsx";
+import {SlideIn} from "/js/components/SlideIn";
 
 export const Notif = () => {
 
@@ -8,7 +9,7 @@ export const Notif = () => {
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(true)
 
-    /** Chargement des notifications au montage du composant + dispatch CustomEvent pour chaque notifications **/
+    /** Chargement des notifications au montage du composant + dispatch Event pour chaque notifications **/
 
     useEffect(() => {
         const fetchData = async() => {
@@ -33,11 +34,13 @@ export const Notif = () => {
     }
 
     return <>
-        <a href="#" className="notification" onClick={handleClick}>
+        <button className="notification" onClick={handleClick}>
             <BadgeNotification number={countUnreadNotifications(notifications)} />
             <SvgIcon name="bi bi-bell" />
-        </a>
-        {open && <Dropdown notif={notifications} loading={loading} handleClose={() => setOpen(false)} />}
+        </button>
+        <SlideIn className="notification-drop shadow" show={open === true}>
+            <Dropdown notif={notifications} loading={loading} handleClose={handleClick}/>
+        </SlideIn>
     </>
 }
 
@@ -45,7 +48,7 @@ export const Notif = () => {
 Représente le badge de notification
  */
 const BadgeNotification = ({number}) => {
-    return number > 0 ? <span className="badge-notification" dangerouslySetInnerHTML={{__html: number > 9 ? '9+' : number}}/> : ''
+    return number > 0 ? <span className="badge-notification" dangerouslySetInnerHTML={{__html: number}}/> : ''
 }
 
 /*
@@ -53,7 +56,7 @@ Représente la dropdown
  */
 const Dropdown = ({notif = [], loading, handleClose}) => {
 
-    return <div className="notification-drop shadow slideIn">
+    return <>
         <div className="notification-title border-bottom">
             <p className="m-0">Mes notifications</p>
             <span onClick={handleClose}>
@@ -61,20 +64,20 @@ const Dropdown = ({notif = [], loading, handleClose}) => {
             </span>
         </div>
         <div className="notification-body">
-           <ul>
-               {loading ? "Chargement" : notif.map(n => <a href="">
-                   <li>
-                       <p dangerouslySetInnerHTML={{__html: n.message}} />
-                       <span><time-ago time={Date.parse(n.createdAt) / 1000} /></span>
-                   </li>
-               </a>
-               )}
-           </ul>
+            <ul>
+                {loading ? "Chargement" : notif.map(n => <a href="">
+                        <li>
+                            <p dangerouslySetInnerHTML={{__html: n.message}} />
+                            <span><time-ago time={Date.parse(n.createdAt) / 1000} /></span>
+                        </li>
+                    </a>
+                )}
+            </ul>
         </div>
         <div className="notification-footer">
             <a href="/notification" className="pointer">Voir mes notifications</a>
         </div>
-    </div>
+    </>
 }
 
 const SvgIcon = ({name}) => {

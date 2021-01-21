@@ -3,12 +3,14 @@
   animation-duration: 1s;
 }
 .fadeOut{
-  animation-name: fadeOut;
-  animation-duration: 1.5s;
+  animation: ease 0.8 fadeOut;
 }
 
 .slideIn{
-  animation: ease-in-out 0.3s slideIn;
+  animation: ease-in 0.3s slideIn;
+}
+.slideOut{
+  animation: ease-in-out 0.3s slideOut;
 }
 .fadeInDown{
   animation: ease 0.3s fadeInDown;
@@ -25,11 +27,11 @@
 @keyframes fadeOut{
   0% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
   100% {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateY(-5%);
   }
 }
 @keyframes slideIn{
@@ -43,6 +45,19 @@
     opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translateY(0);
+  }
+}
+@keyframes slideOut{
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translateY(-5%);
   }
 }
 @keyframes fadeInDown {

@@ -1,29 +1,36 @@
 .notification{
   position: relative;
+  border: none;
+  background-color: transparent;
+}
+.notification:focus,
+.notification:active
+{
+  border: none;
+  outline: none;
 }
 
 .badge-notification{
-  content: '';
+  content: "";
   position: absolute;
-  top: -4px;
-  right: -3px;
+  top: -2px;
+  right: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding-top: 2px;
+  align-items: center;
   color: var(--white);
-  height: 14px;
-  width: 14px;
+  font-size: 9px;
+  font-weight: 900;
   border-radius: 50%;
+  width: 16px;
+  height: 16px;
   background-color: var(--info);
-  font-size: 0.6rem;
-  font-weight: bold;
 }
 
 .notification-drop{
   position: absolute;
   top: 36px;
-  left: calc(-105px + 8px);
+  left: calc(-105px + 14px);
   width: 210px;
   font-size: 13px;
   background-color: var(--light);
@@ -95,22 +102,16 @@
 .notification-body ul a li p{
   margin-bottom: 0;
 }
-.notification-footer{
-  display: block;
-  width: 100%;
-}
 .notification-footer a{
   @extend .border-top;
   @extend .rounded-bottom;
   color: var(--dark);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+  display: block;
+  text-align: center;
+  padding: 10px 0;
   background: var(--light);
 }
 .notification-footer a:hover{
-  background-color: rgba(0,0,0,0.05);
   color: var(--info);
   cursor: pointer;
 }
@@ -124,7 +125,8 @@
     top: 0;
     left: auto;
     right: 0;
-    bottom: 0;
+    height: 100%;
+    width: 250px;
   }
   .notification-title span{
     display: block;
@@ -135,6 +137,7 @@
     cursor: pointer;
   }
   .notification-body{
-    height: calc(100% - 84px);
+    height: calc(100% - 85px);
+    max-height: calc(100% - 85px);
   }
 }
