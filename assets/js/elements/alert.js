@@ -6,10 +6,10 @@ export function Alert({message = '', type = 'success'}){
     alert.style.top = '10px'
     alert.style.right = '10px'
     alert.innerHTML = `${message}`
-    alert.classList.add('fadein')
+    alert.classList.add('slideIn')
     document.body.appendChild(alert)
     setTimeout(() => {
-        alert.classList.remove('fadein')
+        alert.classList.remove('slideIn')
         alert.classList.add('fadeOut')
         alert.onanimationend = function () {
             alert.parentNode.removeChild(this)

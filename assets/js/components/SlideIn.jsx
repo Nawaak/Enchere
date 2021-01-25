@@ -17,7 +17,7 @@ export function SlideIn ({ show, children, style = {}, ...props }) {
     return (
         shouldRender && (
             <div
-                style={{ animation: `${show ? 'slideIn .3s both' : 'fadeOut .4s'}`, ...style }}
+                style={{ animation: `${show ? 'slideIn .3s both' : 'fadeOut .3s'}`, ...style }}
                 onAnimationEnd={onAnimationEnd}
                 {...props}
             >

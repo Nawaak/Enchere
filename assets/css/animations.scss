@@ -1,9 +1,9 @@
 .fadein{
   animation-name: fadeIn;
-  animation-duration: 1s;
+  animation-duration: 0.3s;
 }
 .fadeOut{
-  animation: ease 0.8 fadeOut;
+  animation: ease 0.5s fadeOut;
 }
 
 .slideIn{
@@ -27,11 +27,9 @@
 @keyframes fadeOut{
   0% {
     opacity: 1;
-    transform: translateY(0);
   }
   100% {
     opacity: 0;
-    transform: translateY(-5%);
   }
 }
 @keyframes slideIn{

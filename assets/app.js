@@ -9,7 +9,7 @@ if(user){
     const url = new URL('http://localhost:3001/.well-known/mercure');
     url.searchParams.append('topic', '/notifications/user/' + user);
     const eventSource = new EventSource(url, {
-        withCredentials: false
+        withCredentials: true
     });
     eventSource.onmessage = event => {
         const data = JSON.parse(event.data)
@@ -32,7 +32,8 @@ const burger = document.querySelector(".burger")
 
 if(burger){
     burger.addEventListener('click', function (){
-        const navbar = document.querySelector('.test')
+        const navbar = document.querySelector('nav.navbar')
+        document.body.classList.toggle('is-open')
         navbar.classList.toggle('is-open')
     })
 }
