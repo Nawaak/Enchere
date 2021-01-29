@@ -1,98 +1,96 @@
-.navbar a, a:hover
-{
-  text-decoration: none;
-}
-
-.navbar-toggler
-{
+.navbar-toggler {
   outline: none;
 }
 
-.navbar-toggler-icon
-{
-  background:url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI2IDI2IiBpZD0i0KHQu9C+0LlfMSIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjYgMjYiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnPjxwYXRoIGQ9Ik0yNC4yNSwxMi4yNUgxLjc1QzEuMzM1OTM3NSwxMi4yNSwxLDEyLjU4NTkzNzUsMSwxM3MwLjMzNTkzNzUsMC43NSwwLjc1LDAuNzVoMjIuNSAgIGMwLjQxNDA2MjUsMCwwLjc1LTAuMzM1OTM3NSwwLjc1LTAuNzVTMjQuNjY0MDYyNSwxMi4yNSwyNC4yNSwxMi4yNXoiIGZpbGw9IiMxRDFEMUIiLz48cGF0aCBkPSJNMS43NSw3Ljc1aDIyLjVDMjQuNjY0MDYyNSw3Ljc1LDI1LDcuNDE0MDYyNSwyNSw3cy0wLjMzNTkzNzUtMC43NS0wLjc1LTAuNzVIMS43NSAgIEMxLjMzNTkzNzUsNi4yNSwxLDYuNTg1OTM3NSwxLDdTMS4zMzU5Mzc1LDcuNzUsMS43NSw3Ljc1eiIgZmlsbD0iIzFEMUQxQiIvPjxwYXRoIGQ9Ik0yNC4yNSwxOC4yNUgxLjc1QzEuMzM1OTM3NSwxOC4yNSwxLDE4LjU4NTkzNzUsMSwxOXMwLjMzNTkzNzUsMC43NSwwLjc1LDAuNzVoMjIuNSAgIGMwLjQxNDA2MjUsMCwwLjc1LTAuMzM1OTM3NSwwLjc1LTAuNzVTMjQuNjY0MDYyNSwxOC4yNSwyNC4yNSwxOC4yNXoiIGZpbGw9IiMxRDFEMUIiLz48L2c+PC9zdmc+');
+.navbar-toggler-icon {
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI2IDI2IiBpZD0i0KHQu9C+0LlfMSIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjYgMjYiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnPjxwYXRoIGQ9Ik0yNC4yNSwxMi4yNUgxLjc1QzEuMzM1OTM3NSwxMi4yNSwxLDEyLjU4NTkzNzUsMSwxM3MwLjMzNTkzNzUsMC43NSwwLjc1LDAuNzVoMjIuNSAgIGMwLjQxNDA2MjUsMCwwLjc1LTAuMzM1OTM3NSwwLjc1LTAuNzVTMjQuNjY0MDYyNSwxMi4yNSwyNC4yNSwxMi4yNXoiIGZpbGw9IiMxRDFEMUIiLz48cGF0aCBkPSJNMS43NSw3Ljc1aDIyLjVDMjQuNjY0MDYyNSw3Ljc1LDI1LDcuNDE0MDYyNSwyNSw3cy0wLjMzNTkzNzUtMC43NS0wLjc1LTAuNzVIMS43NSAgIEMxLjMzNTkzNzUsNi4yNSwxLDYuNTg1OTM3NSwxLDdTMS4zMzU5Mzc1LDcuNzUsMS43NSw3Ljc1eiIgZmlsbD0iIzFEMUQxQiIvPjxwYXRoIGQ9Ik0yNC4yNSwxOC4yNUgxLjc1QzEuMzM1OTM3NSwxOC4yNSwxLDE4LjU4NTkzNzUsMSwxOXMwLjMzNTkzNzUsMC43NSwwLjc1LDAuNzVoMjIuNSAgIGMwLjQxNDA2MjUsMCwwLjc1LTAuMzM1OTM3NSwwLjc1LTAuNzVTMjQuNjY0MDYyNSwxOC4yNSwyNC4yNSwxOC4yNXoiIGZpbGw9IiMxRDFEMUIiLz48L2c+PC9zdmc+');
 }
 
-.navbar{
+.navbar {
   display: none;
 }
-.navbar a.navbar-brand
-{
+
+.navbar a.navbar-brand {
   flex: 1 0 0;
   color: var(--dark);
 }
-.navbar li{
+
+.navbar li {
   padding-right: 0.5rem;
-  &:last-child{
+
+  &:last-child {
     padding-right: 12px;
   }
 }
 
-.navbar .header-side{
+.navbar .header-side {
   & > li {
     display: flex;
     align-items: center;
     padding-right: 12px;
   }
 }
+
 .navbar .header-side > * > *,
-.navbar .header-side > * > * > button{
+.navbar .header-side > * > * > a {
   display: flex;
   align-items: center;
 }
 
-.navbar.is-open{
+.navbar.is-open {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 3;
 
-  .header-side{
+  .header-side {
     order: 1;
     justify-content: flex-end;
   }
 
-  .navbar-search{
+  .navbar-search {
     display: flex;
     order: 2;
     width: 100%;
     animation: fadeIn .3s;
+
     & > * {
       width: 100%;
       margin-bottom: 0.5rem;
       padding: 0;
     }
-    &:last-child{
+
+    &:last-child {
       padding-right: 0.5rem;
     }
   }
 }
 
-@media screen and (min-width: 768px){
-  .navbar{
+@media screen and (min-width: 768px) {
+  .navbar {
     display: flex;
     align-items: center;
   }
-  .nav-item > input{
+  .nav-item > input {
     max-width: 160px;
     text-overflow: ellipsis;
   }
-  .navbar li{
+  .navbar li {
     list-style: none;
   }
-  .burger{
+  .burger {
     display: none;
   }
-  .navbar .header-side{
-    & li:last-of-type{
+  .navbar .header-side {
+    & li:last-of-type {
       padding-right: 0;
     }
   }
 }
 
-@media screen and (min-width: 992px){
-  .nav-item > input{
+@media screen and (min-width: 992px) {
+  .nav-item > input {
     max-width: max-content;
   }
 }

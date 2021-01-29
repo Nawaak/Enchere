@@ -1,21 +1,20 @@
-.notification{
+.notification {
   position: relative;
   border: none;
   background-color: transparent;
 }
 
 .notification:focus,
-.notification:active
-{
+.notification:active {
   border: none;
   outline: none;
 }
 
-.badge-notification{
+.badge-notification {
   content: "";
   position: absolute;
   top: -3px;
-  right:0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,51 +27,50 @@
   background-color: var(--danger);
 }
 
-.notification-drop{
-  position: absolute;
-  top: 30px;
-  left: calc(-105px + 7px);
-  width: 210px;
+.notification-drop {
+  position: fixed;
+  top: 0;
+  left: auto;
+  right: 0;
+  height: 100%;
+  width: 250px;
   font-size: 13px;
   background-color: var(--light);
   @extend .shadow;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   z-index: 9999;
-
-  &::before{
-    content: '';
-    position: absolute;
-    top: -12px;
-    right: calc(50% - 8px);
-    display: block;
-    width: 16px;
-    height: 16px;
-    background: url("../../image/caret.svg");
-  }
-
+  transition: .3s !important;
 }
 
-.notification-title{
+.notification-title {
+  position: relative;
   display: flex;
   justify-content: center;
   padding: 10px;
   font-size: 16px;
   font-weight: 400;
-
-  span{
-    display: none;
-  }
 }
-.notification-body{
+
+.notification-title span {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.notification-body {
   @extend .scrollbar;
-  height: 220px;
+  height: calc(100% - 85px);
+  max-height: calc(100% - 85px);
   overflow-y: auto;
 }
-.notification-body ul{
+
+.notification-body ul {
   padding: 0;
 }
-.notification-body ul > *{
+
+.notification-body ul > * {
   @extend .border-bottom;
   list-style: none;
   display: flex;
@@ -80,65 +78,74 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.notification-body ul a:hover{
-  color: var(--info);
-  background-color: rgba(0,0,0,0.05);
+
+.notification-body ul a:hover {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.02);
 }
-.notification-body ul a:last-child{
+
+.notification-body ul a:last-child {
   margin-bottom: 0;
   border: none !important;
 }
-.notification-body ul a li > *{
+
+.notification-body ul a li > * {
   padding: 0 15px;
 }
+
 .notification-body ul a li p,
-.notification-body ul a li{
+.notification-body ul a li {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
   margin-bottom: 0;
 }
 
-.notification-body ul a li span{
-  @extend .text-muted
+.notification-body ul a li span {
+  @extend .text-muted;
 }
 
-.notification-footer a{
+.notification-footer {
   @extend .border-top;
-  @extend .rounded-bottom;
-  color: var(--dark);
-  display: block;
   text-align: center;
   padding: 10px 0;
-  background: var(--light);
+  margin: 0;
 }
-.notification-footer a:hover{
+
+.notification-footer a {
+
+  color: var(--dark);
+  text-align: center;
+}
+
+.notification-footer a:hover {
   color: var(--info);
   cursor: pointer;
 }
 
-@media screen and (max-width: 850px){
-  .notification-drop{
-    &::before{
-      display: none;
-    }
-    position: fixed;
-    top: 0;
-    left: auto;
-    right: 0;
-    height: 100%;
-    width: 250px;
-  }
-  .notification-title span{
-    display: block;
+@media screen and (min-width: 1075px) {
+  .notification-drop {
     position: absolute;
-    right: 0.75rem;
+    top: 30px;
+    left: calc(-115px + 7px);
+    width: 230px;
+    height: auto !important;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      right: calc(50% - 8px);
+      display: block;
+      width: 16px;
+      height: 16px;
+      background: url("../../image/caret.svg");
+    }
   }
-  .notification-title span:hover{
-    cursor: pointer;
+  .notification-title span {
+    display: none;
   }
-  .notification-body{
-    height: calc(100% - 85px);
-    max-height: calc(100% - 85px);
+  .notification-body {
+    max-height: 300px;
   }
 }

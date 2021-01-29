@@ -11,19 +11,19 @@
         <section class="category my-3">
             <div class="grid">
                 {% for c in category %}
-                <div>
-                    <h5 class="text-center"> {{ c.name }} </h5>
-                    <div class="grid-image">
-                        <a href="{{ path('category.show', {slug: c.slug}) }}">
-                            <img src="{{ c.image }}" alt="{{ c.name }}">
-                        </a>
+                    <div>
+                        <h5 class="text-center"> {{ c.name }} </h5>
+                        <div class="grid-image">
+                            <a href="{{ path('category.show', {slug: c.slug}) }}">
+                                <img src="{{ c.image }}" alt="{{ c.name }}">
+                            </a>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </section>
 
-        <section>
+        <section style="overflow: hidden">
             <div class="title-last-offer">
                 <h2> A ne pas manquer </h2>
                 <span class="h2-border"></span>
@@ -36,7 +36,7 @@
                     <img src="{{ asset('/image/offer/rolex.jpg') }}" alt="">
                     <div class="last-offer-body">
                         <p>Offre en cours: <strong>11.000€</strong> <br>
-                        <i style="color:red; font-weight: bold">Temps restant : 11h et 27min</i>
+                            <i style="color:red; font-weight: bold">Temps restant : 11h et 27min</i>
                         </p>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     </div>
                     <img src="{{ asset('/image/offer/rolex.jpg') }}" alt="">
                     <div class="last-offer-body">
-                        <p>Offre en cours: <strong>11.000€</strong> </p>
+                        <p>Offre en cours: <strong>11.000€</strong></p>
                     </div>
                 </div>
                 <div>
@@ -55,7 +55,7 @@
                     </div>
                     <img src="{{ asset('/image/offer/rolex.jpg') }}" alt="">
                     <div class="last-offer-body">
-                        <p>Offre en cours: <strong>11.000€</strong> </p>
+                        <p>Offre en cours: <strong>11.000€</strong></p>
                     </div>
                 </div>
                 <div>
@@ -64,7 +64,7 @@
                     </div>
                     <img src="{{ asset('/image/offer/rolex.jpg') }}" alt="">
                     <div class="last-offer-body">
-                        <p>Offre en cours: <strong>11.000€</strong> </p>
+                        <p>Offre en cours: <strong>11.000€</strong></p>
                     </div>
                 </div>
             </div>
@@ -93,10 +93,15 @@
                                 <div class="carousel-inner px-5 pb-4">
                                     <!-- Carousel slide-->
                                     <div class="carousel-item">
-                                        <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg" alt="" width="75">
+                                        <div class="media"><img class="rounded-circle img-thumbnail"
+                                                                src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg"
+                                                                alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-weight-light lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="font-weight-light lead"><i
+                                                                class="fa fa-quote-left mr-3 text-success"></i>Lorem
+                                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <footer class="blockquote-footer">
                                                         Pascal, le 21 Mai 2020
                                                     </footer>
@@ -107,10 +112,15 @@
 
                                     <!-- Carousel slide-->
                                     <div class="carousel-item active">
-                                        <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
+                                        <div class="media"><img class="rounded-circle img-thumbnail"
+                                                                src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg"
+                                                                alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-weight-light lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="font-weight-light lead"><i
+                                                                class="fa fa-quote-left mr-3 text-success"></i>Lorem
+                                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <footer class="blockquote-footer">
                                                         Veronique, le 1 Mai 2020
                                                     </footer>
@@ -121,10 +131,15 @@
 
                                     <!-- Carousel slide-->
                                     <div class="carousel-item">
-                                        <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
+                                        <div class="media"><img class="rounded-circle img-thumbnail"
+                                                                src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg"
+                                                                alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-weight-light lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="font-weight-light lead"><i
+                                                                class="fa fa-quote-left mr-3 text-success"></i>Lorem
+                                                        ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <footer class="blockquote-footer">
                                                         Jean-luc, le 01 Février 2020
                                                     </footer>
@@ -136,11 +151,13 @@
 
 
                                 <!-- Bootstrap controls [dots]-->
-                                <a class="carousel-control-prev w-auto" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <a class="carousel-control-prev w-auto" href="#carouselExampleIndicators" role="button"
+                                   data-slide="prev">
                                     <i class="fa fa-angle-left text-dark text-lg"></i>
                                     <span class="sr-only">Précedent</span>
                                 </a>
-                                <a class="carousel-control-next w-auto" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <a class="carousel-control-next w-auto" href="#carouselExampleIndicators" role="button"
+                                   data-slide="next">
                                     <i class="fa fa-angle-right text-dark text-lg"></i>
                                     <span class="sr-only">Suivant</span>
                                 </a>

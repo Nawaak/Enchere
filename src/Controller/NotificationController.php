@@ -29,7 +29,6 @@ class NotificationController extends AbstractController
     /**
      * @Route("api/notifications/user/{id}/read", name="notification_read", methods={"POST"})
      * @param int $id
-     * @param NotificationRepository $notificationRepository
      * @return RedirectResponse
      */
     public function markRead(int $id): RedirectResponse

@@ -24,6 +24,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                use_referer: true
             logout:
                 path: logout
                 # where to redirect after logout

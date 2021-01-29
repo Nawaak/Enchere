@@ -1,87 +1,100 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Bid - {% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-md bg-light py-1 d-flex">
-            <div class="container">
-                <a class="navbar-brand" href="{{ path('index') }}">Enchere.fr</a>
-                <ul class="navbar m-0 p-0 list-unstyled navbar-search" id="navbarNav">
-                    <li class="nav-item">
-                        <input type="text" class="form-control form-control-sm" placeholder="Rechercher un objet, un lot, etc">
-                    </li>
-                    <li class="nav-item">
-                        <select class="form-control-sm w-100">
-                            <option selected>Choisir une catégorie</option>
-                            <option value="1">Valeur</option>
-                            <option value="2">Valeur</option>
-                            <option value="3">Valeur</option>
-                            <option value="4">Valeur</option>
-                        </select>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-info  btn-sm w-100">Rechercher</a>
-                    </li>
-                </ul>
-                <ul class="d-flex m-0 list-unstyled header-side">
-                    {% if app.user %}
-                        <li class="position-relative">
-                            <site-notifications></site-notifications>
-                        </li>
-                        <li>
-                            <a href="{{ path('messagerie') }}">
-                                <svg width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 13.1268c3.8658 0 7-2.9385 7-6.5634C14 2.93853 10.8658 0 7 0 3.13425 0 0 2.93853 0 6.5634c0 1.65023.650125 3.15981 1.72375 4.3131-.08487.9526-.36487 1.9971-.67462 2.781-.06913.1744.06475.3694.23887.3394 1.974-.3469 3.14737-.8795 3.6575-1.157.67017.1915 1.3609.288 2.0545.2869z" fill="#343a40"/>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6c.79565 0 1.55871-.31607 2.12132-.87868C8.68393 4.55871 9 3.79565 9 3S8.68393 1.44129 8.12132.87868C7.55871.316071 6.79565 0 6 0S4.44129.316071 3.87868.87868C3.31607 1.44129 3 2.20435 3 3s.31607 1.55871.87868 2.12132C4.44129 5.68393 5.20435 6 6 6z" fill="#343a40"/>
-                                </svg>
-                            </a>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{{ path('login') }}">
-                                <svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6c.79565 0 1.55871-.31607 2.12132-.87868C8.68393 4.55871 9 3.79565 9 3S8.68393 1.44129 8.12132.87868C7.55871.316071 6.79565 0 6 0S4.44129.316071 3.87868.87868C3.31607 1.44129 3 2.20435 3 3s.31607 1.55871.87868 2.12132C4.44129 5.68393 5.20435 6 6 6z" fill="#343a40"/>
-                                </svg>
-                            </a>
-                        </li>
-                    {% endif %}
-                    <button class="burger pl-0 pr-0 border-0 bg-transparent" type="button">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Bid - {% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-light py-1 d-flex">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('index') }}">Enchere.fr</a>
+        <ul class="navbar m-0 p-0 list-unstyled navbar-search" id="navbarNav">
+            <li class="nav-item">
+                <input type="text" class="form-control form-control-sm" placeholder="Rechercher un objet, un lot, etc">
+            </li>
+            <li class="nav-item">
+                <select class="form-control-sm w-100">
+                    <option selected>Choisir une catégorie</option>
+                    <option value="1">Valeur</option>
+                    <option value="2">Valeur</option>
+                    <option value="3">Valeur</option>
+                    <option value="4">Valeur</option>
+                </select>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-info  btn-sm w-100">Rechercher</a>
+            </li>
+        </ul>
+        <ul class="d-flex m-0 list-unstyled header-side">
+            {% if app.user %}
+                <li class="position-relative">
+                    <site-notifications></site-notifications>
+                </li>
+                <li>
+                    <a href="{{ path('messagerie') }}">
+                        <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 13.1268c3.8658 0 7-2.9385 7-6.5634C14 2.93853 10.8658 0 7 0 3.13425 0 0 2.93853 0 6.5634c0 1.65023.650125 3.15981 1.72375 4.3131-.08487.9526-.36487 1.9971-.67462 2.781-.06913.1744.06475.3694.23887.3394 1.974-.3469 3.14737-.8795 3.6575-1.157.67017.1915 1.3609.288 2.0545.2869z"
+                                  fill="currentColor"/>
                         </svg>
-                    </button>
-                </ul>
-            </div>
-        </nav>
-        {% block body %}{% endblock %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6c.79565 0 1.55871-.31607 2.12132-.87868C8.68393 4.55871 9 3.79565 9 3S8.68393 1.44129 8.12132.87868C7.55871.316071 6.79565 0 6 0S4.44129.316071 3.87868.87868C3.31607 1.44129 3 2.20435 3 3s.31607 1.55871.87868 2.12132C4.44129 5.68393 5.20435 6 6 6z"
+                                  fill="currentColor"/>
+                        </svg>
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ path('login') }}">
+                        <svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6c.79565 0 1.55871-.31607 2.12132-.87868C8.68393 4.55871 9 3.79565 9 3S8.68393 1.44129 8.12132.87868C7.55871.316071 6.79565 0 6 0S4.44129.316071 3.87868.87868C3.31607 1.44129 3 2.20435 3 3s.31607 1.55871.87868 2.12132C4.44129 5.68393 5.20435 6 6 6z"
+                                  fill="currentColor"/>
+                        </svg>
+                    </a>
+                </li>
+            {% endif %}
+            <button class="burger pl-0 pr-0 border-0 bg-transparent" type="button">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+            </button>
+        </ul>
+    </div>
+</nav>
+{% block body %}{% endblock %}
 
-        <footer class="footer text-muted bg-light">
-            <div class="container d-flex align-items-center justify-content-between p-3">
-                <p class="m-0">Encheres.fr © Bootstrap</p>
-                <a href="#">Revenir en haut</a>
-            </div>
-        </footer>
-
-        <script>
-            const user = {{ app.user ? app.user.id : 0 }}
-        </script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
+<footer class="footer text-muted bg-light">
+    <div class="container d-flex align-items-center justify-content-between p-3">
+        <p class="m-0">Encheres.fr © Bootstrap</p>
+        <a href="#">Revenir en haut</a>
+    </div>
+</footer>
+<script>
+    const user = {{ app.user ? app.user.id : 0 }}
+    const lastNotificationReadAt = {{ (app.user and app.user.notificationReadAt) ? app.user.notificationReadAt.timestamp : 0 }}
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
 </html>

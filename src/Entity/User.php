@@ -66,6 +66,11 @@ class User implements UserInterface
      */
     private $notifications;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $notificationReadAt;
+
     public function __construct()
     {
         $this->offerBiddings = new ArrayCollection();
@@ -247,6 +252,18 @@ class User implements UserInterface
                 $notification->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNotificationReadAt(): ?\DateTimeInterface
+    {
+        return $this->notificationReadAt;
+    }
+
+    public function setNotificationReadAt(?\DateTimeInterface $notificationReadAt): self
+    {
+        $this->notificationReadAt = $notificationReadAt;
 
         return $this;
     }

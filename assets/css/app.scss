@@ -1,37 +1,46 @@
 @import "bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-html{
-    height: -moz-available;          /* WebKit-based browsers will ignore this. */
-    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-    height: fill-available;
-}
-body{
-    background: #fff;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-}
-a{
-    color: inherit;
-}
-body.is-open{
-    padding-top: 48px !important;
+html {
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
 }
 
-::selection{
-    background-color: var(--info);
+body {
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
 }
 
-.popover{
-    max-width: 100%;
+body.is-open {
+  padding-top: 48px !important;
 }
 
-.shadow{
-    box-shadow: 10px 10px 35px rgba(0,0,0,0.5), -10px -10px 35px rgba(0,0,0,0.5);
+a:hover {
+  color: var(--info);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background-color: var(--info);
+}
+
+.popover {
+  max-width: 100%;
+}
+
+.shadow {
+  box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.5), -10px -10px 35px rgba(0, 0, 0, 0.5);
 }
 
 /**

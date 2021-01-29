@@ -2,25 +2,22 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\NotificationRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
  * @ApiResource(
- *     itemOperations={
+ *     itemOperations={"get"},
+ *     collectionOperations={
+ *          "post",
  *          "get"={
- *
- *     },
- *     "put"
- *     },
- *     collectionOperations={"post","get"},
+ *              "security"="is_granted('ROLE_USER')",
+ *              "security_message"="Vous devez être connecté pour accéder à vos notifications"
+ *          }
+ *     }
  * )
- * @ApiFilter(SearchFilter::class, properties={"user.id": "exact", "read": "exact"})
- * @ApiFilter(OrderFilter::class, properties={"id"})
  * @ORM\Entity(repositoryClass=NotificationRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
@@ -41,7 +38,7 @@ class Notification
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTimeInterface $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
@@ -56,7 +53,8 @@ class Notification
     /**
      * @ORM\PrePersist()
      */
-    public function prePersist(): void{
+    public function prePersist(): void
+    {
         $this->setRead(false);
     }
 
@@ -77,12 +75,12 @@ class Notification
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
