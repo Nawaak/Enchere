@@ -9,12 +9,13 @@ let notificationsLoaded = false
 
 export const Notif = () => {
 
-    const [notifications, pushNotifications] = usePrepend()
+    const [notifications, pushNotifications] = usePrepend(notificationCached)
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(!notificationsLoaded)
     const [notificationReadAt, setNotificationReadAt] = useState(lastNotificationReadAt)
     const unreadNotification = countUnreadNotifications(notifications, notificationReadAt)
     notificationCached = notifications
+
     /** Chargement des notifications au montage du composant + dispatch Event pour chaque notifications **/
 
     useEffect(() => {
@@ -25,9 +26,8 @@ export const Notif = () => {
                 type: "notification",
                 detail: notification
             })))
-            setLoading(false)
         }
-        if(notificationCached === false){
+        if (notificationsLoaded === false) {
             fetchData()
             setLoading(false)
             notificationsLoaded = true
@@ -41,10 +41,10 @@ export const Notif = () => {
     }, [pushNotifications])
 
 
-    const handleClick = async(e) => {
+    const handleClick = async (e) => {
         e.preventDefault()
         setOpen(!open)
-        if(unreadNotification > 0){
+        if (unreadNotification > 0) {
             await fetch('/api/notification/read', {
                 method: "POST"
             }).then(() => {
@@ -88,15 +88,19 @@ const Dropdown = ({notif = [], loading, handleClose}) => {
             </span>
         </div>
         <div className="notification-body">
-            <ul>
-                {notif.length === 0 ?
-                    <li className="text-center px-0 py-4 font-italic" style="border: none !important">
-                        Vous n'avez aucune notification :(
+            {notif.length === 0 ?
+                <ul className="d-flex h-100 align-items-center justify-content-center">
+                    <li className="px-0 py-4 text-muted" style="border: none !important" dangerouslySetInnerHTML={{
+                        __html:
+                            "Vous n'avez aucune notification &#128543"
+                    }}>
                     </li>
-                    : ""
-                }
+                </ul>
+                : ""
+            }
+            <ul>
                 {notif.map(n => <a href="">
-                    <li>
+                        <li>
                             <p dangerouslySetInnerHTML={{__html: n.message}}/>
                             <span><time-ago time={Date.parse(n.createdAt) / 1000}/></span>
                         </li>
