@@ -8,6 +8,8 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+/public/image
+
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
