@@ -12,8 +12,8 @@
     {% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-light py-1 d-flex">
-    <div class="container">
+<nav class="navbar bg-light d-flex">
+    <div class="container py-2">
         <a class="navbar-brand" href="{{ path('index') }}">Enchere.fr</a>
         <ul class="navbar m-0 p-0 list-unstyled navbar-search" id="navbarNav">
             <li class="nav-item">
@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ path('profile') }}">
                         <svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6c.79565 0 1.55871-.31607 2.12132-.87868C8.68393 4.55871 9 3.79565 9 3S8.68393 1.44129 8.12132.87868C7.55871.316071 6.79565 0 6 0S4.44129.316071 3.87868.87868C3.31607 1.44129 3 2.20435 3 3s.31607 1.55871.87868 2.12132C4.44129 5.68393 5.20435 6 6 6z"
@@ -77,8 +77,8 @@
 </nav>
 {% block body %}{% endblock %}
 
-<footer class="footer text-muted bg-light">
-    <div class="container d-flex align-items-center justify-content-between p-3">
+<footer class="footer p-3 text-muted bg-light">
+    <div class="container d-flex align-items-center justify-content-between">
         <p class="m-0">Encheres.fr © Bootstrap</p>
         <a href="#">Revenir en haut</a>
     </div>

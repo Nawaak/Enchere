@@ -16,11 +16,16 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
 }
-
-body.is-open {
-  padding-top: 48px !important;
+.row{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
-
+body.is-open {
+  padding-top: 56px !important;
+}
+hr{
+  margin: 0 !important;
+}
 a:hover {
   color: var(--info);
   cursor: pointer;
@@ -43,6 +48,18 @@ a {
   box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.5), -10px -10px 35px rgba(0, 0, 0, 0.5);
 }
 
+
+@media screen and (min-width: 576px){
+  .container{
+    max-width: 100% !important;
+  }
+}
+@media screen and (min-width: 968px){
+  .container{
+    max-width: 1400px !important;
+  }
+}
+
 /**
 IMPORT
  */
@@ -58,5 +75,6 @@ IMPORT
 @import "notification";
 @import "footer";
 @import "chat";
+@import "profile";
 
 

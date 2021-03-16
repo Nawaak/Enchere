@@ -37,7 +37,7 @@ final class QueryNotificationExtension implements QueryCollectionExtensionInterf
             return;
         }
 
-        $lastNotificationReadAt = $user->getNotificationReadAt()->format('Y-m-d H:i:s');
+        $lastNotificationReadAt = $user->getNotificationReadAt() ? $user->getNotificationReadAt()->format('Y-m-d H:i:s') : null;
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $queryBuilder->andWhere(sprintf('%s.user = :current_user', $rootAlias));
         $queryBuilder->andWhere(sprintf('%s.createdAt > :last_read', $rootAlias));

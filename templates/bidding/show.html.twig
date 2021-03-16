@@ -34,7 +34,6 @@
         <div class="col-12 col-lg-4 mt-4 mt-lg-0">
             <div>
                 <h3>Les offres</h3>
-                <hr>
                 <ul class="list-group overflow-auto scrollbar" style="max-height: 197px;">
                     {% for o in offer %}
                         <li class="list-group-item">{{ o.user.username | hide_name }}, a fait une offre de <b>{{ o.price | format_currency('EUR',{fraction_digit: 0})}}</b></li>

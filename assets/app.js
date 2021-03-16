@@ -28,13 +28,21 @@ if (user) {
     }
 }
 
-const burger = document.querySelector(".burger")
+const burger_menu = document.querySelector(".burger")
 
-if (burger) {
-    burger.addEventListener('click', function () {
+if (burger_menu) {
+    burger_menu.addEventListener('click', function () {
         const navbar = document.querySelector('nav.navbar')
         document.body.classList.toggle('is-open')
         navbar.classList.toggle('is-open')
+    })
+}
+const burger_profile = document.querySelector(".profile-header .burger")
+if (burger_profile) {
+    burger_profile.addEventListener('click', function () {
+        const profile = document.querySelector('.profile .col-left')
+        profile.classList.toggle('is-open')
+        profile.classList.toggle('fadeInDown')
     })
 }
 
