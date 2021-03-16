@@ -41,6 +41,7 @@ class Bidding
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("read:bidding")
      */
     private string $image;
 
