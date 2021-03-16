@@ -38,5 +38,10 @@ services:
 
     App\Twig\TwigTimeAgoExtension:
         class: App\Twig\TwigTimeAgoExtension
+
+    App\MeiliSearch\MeiliSearchIndexer:
+        class: App\MeiliSearch\MeiliSearchIndexer
+        arguments:
+            $apiKey: '%env(resolve:MEILI_SECRET_KEY)%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

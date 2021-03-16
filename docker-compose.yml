@@ -28,6 +28,15 @@ services:
       ALLOW_ANONYMOUS: 1
     ports:
       - 3001:80
+  meilisearch:
+    container_name: meilisearch
+    image: getmeili/meilisearch:latest
+    environment:
+      MEILI_MASTER_KEY: 123
+    volumes:
+      - ./data.ms:/var/www/enchere/data.ms
+    ports:
+      - 7700:7700
   node:
     user: '${USER_ID}:${GROUP_ID}'
     image: node:10.23-alpine
